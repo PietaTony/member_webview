@@ -1,0 +1,9 @@
+{
+  "root": "/",
+  "login": "/login",
+  "table": "/table",
+  "createAccount": "/create-account",
+  "forgetPassword": "/forget-password",
+  "updatePassowrd": "/update-password",
+  "designer": "/designer"
+}
