@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Designer from "./component/Designer";
+import Designer from "./component/designer/Designer";
 import SideBar from "../components/SideBar";
 import Pdf from "react-to-pdf";
 import { Button } from "react-bootstrap";
@@ -16,8 +16,8 @@ export default function DesignerPage() {
       <div style={Style.main}>
         <div ref={ref}>
           <Designer
-            width={800}
-            height={700}
+            width={400}
+            height={350}
             objects={objects}
             onUpdate={(newObjects) => setObjects(newObjects)}
           />

@@ -5,5 +5,6 @@
   "createAccount": "/create-account",
   "forgetPassword": "/forget-password",
   "updatePassowrd": "/update-password",
-  "designer": "/designer"
+  "designer": "/designer",
+  "main": "/main"
 }
