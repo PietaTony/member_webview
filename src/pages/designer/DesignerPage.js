@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Designer from "./component/designer/Designer";
-import SideBar from "../components/SideBar";
 import Pdf from "react-to-pdf";
 import { Button } from "react-bootstrap";
 
@@ -10,9 +9,6 @@ export default function DesignerPage() {
 
   return (
     <>
-      <div style={Style.sidenav}>
-        <SideBar width={Style.sidenav.width} />
-      </div>
       <div style={Style.main}>
         <div ref={ref}>
           <Designer
