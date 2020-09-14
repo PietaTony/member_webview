@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import str from "../../config/zh-tw.json";
-import AddBar from "./component/AddBar";
-import ShowTable from "./component/Table";
+import React, { useState } from 'react';
+import str from '../../config/zh-tw.json';
+import AddBar from './component/AddBar';
+import ShowTable from './component/Table';
 // import { useParams } from "react-router-dom";
 
 export default function TablePage() {

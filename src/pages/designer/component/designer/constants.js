@@ -13,6 +13,5 @@ export const modes = {
   ROTATE,
   DRAW,
   TYPE,
-  EDIT_OBJECT
+  EDIT_OBJECT,
 };
-

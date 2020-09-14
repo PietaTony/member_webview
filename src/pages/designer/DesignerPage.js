@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Designer from "./component/designer/Designer";
-import Pdf from "react-to-pdf";
-import { Button } from "react-bootstrap";
+import React, { useState } from 'react';
+import Designer from './component/designer/Designer';
+import Pdf from 'react-to-pdf';
+import { Button } from 'react-bootstrap';
 
 export default function DesignerPage() {
   const [objects, setObjects] = useState([]);
@@ -29,19 +29,19 @@ export default function DesignerPage() {
 const sidenavSize = 180;
 const Style = {
   sidenav: {
-    height: "100%",
+    height: '100%',
     width: sidenavSize,
-    position: "fixed",
-    "z-index": 1,
+    position: 'fixed',
+    'z-index': 1,
     top: 0,
     left: 0,
-    "background-color": "#111",
-    "overflow-x": "hidden",
-    "padding-top": "20px",
+    'background-color': '#111',
+    'overflow-x': 'hidden',
+    'padding-top': '20px',
   },
   main: {
-    "margin-left": sidenavSize /* Same as the width of the sidenav */,
-    "font-size": "28px" /* Increased text to enable scrolling */,
-    padding: "0px 10px",
+    'margin-left': sidenavSize /* Same as the width of the sidenav */,
+    'font-size': '28px' /* Increased text to enable scrolling */,
+    padding: '0px 10px',
   },
 };

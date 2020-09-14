@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   InputGroup,
   DropdownButton,
   Dropdown,
   Button,
   Form,
-} from "react-bootstrap";
-import Str from "../../../config/zh-tw.json";
+} from 'react-bootstrap';
+import Str from '../../../config/zh-tw.json';
 
 export default function AddBar({ setBody }) {
   const [term, setTerm] = useState(Str.term + Str.name);
@@ -40,8 +40,7 @@ export default function AddBar({ setBody }) {
               ...oldBody,
               { term: term, type: termType, content: content },
             ])
-          }
-        >
+          }>
           {Str.new}
         </Button>
       </InputGroup.Append>
@@ -55,7 +54,7 @@ function TypeDropdown({ termType, setTermType }) {
     Items.push(
       <Dropdown.Item key={key} eventKey={Str.types[key]}>
         {Str.types[key]}
-      </Dropdown.Item>
+      </Dropdown.Item>,
     );
   });
   return (
@@ -66,8 +65,7 @@ function TypeDropdown({ termType, setTermType }) {
       id="items"
       onSelect={(e) => {
         setTermType(e);
-      }}
-    >
+      }}>
       {Items}
     </DropdownButton>
   );

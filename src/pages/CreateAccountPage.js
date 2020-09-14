@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { Button, Form, Card } from "react-bootstrap";
-import Str from "../config/zh-tw.json";
-import { reqNewUser } from "../net/memberAPI";
+import { Button, Form, Card } from 'react-bootstrap';
+import Str from '../config/zh-tw.json';
+import { reqNewUser } from '../net/memberAPI';
 
 export default function CreateAccountPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function CreateAccountPage() {
 
   return (
     <div className="CreateAccount" align="center">
-      <Card style={{ width: "20rem" }} border="Dark">
+      <Card style={{ width: '20rem' }} border="Dark">
         <Card.Body>
           <Form>
             <EmailBar email={email} setEmail={setEmail} />
@@ -29,8 +29,7 @@ export default function CreateAccountPage() {
               variant="danger"
               type="submit"
               disabled={!isCheck}
-              onClick={() => reqNewUser({ email: email, password: password })}
-            >
+              onClick={() => reqNewUser({ email: email, password: password })}>
               {Str.create}
             </Button>
           </Form>

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Button, Form, Card } from "react-bootstrap";
-import Str from "../config/zh-tw.json";
-import { reqLogin } from "../net/memberAPI";
-import Pages from "./Pages.json";
+import { Button, Form, Card } from 'react-bootstrap';
+import Str from '../config/zh-tw.json';
+import { reqLogin } from '../net/memberAPI';
+import Pages from './Pages.json';
 
 export default function LoginPage({ history }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="Login" align="center">
-      <Card style={{ width: "20rem" }} border="Dark">
+      <Card style={{ width: '20rem' }} border="Dark">
         <Card.Body>
           <Form>
             <EmailBar email={email} setEmail={setEmail} />
@@ -66,26 +66,23 @@ function ButtonBar({ history, state }) {
         variant="danger"
         onClick={() =>
           reqLogin(state).then((res) => {
-            if (res.status === "Success") {
-              history.push("/" + res.token);
+            if (res.status === 'Success') {
+              history.push('/' + res.token);
             }
           })
-        }
-      >
+        }>
         {Str.login}
       </Button>
 
       <Button
         variant="primary"
-        onClick={() => history.push(Pages.createAccount)}
-      >
+        onClick={() => history.push(Pages.createAccount)}>
         {Str.create}
       </Button>
 
       <Button
         variant="warning"
-        onClick={() => history.push(Pages.forgetPassword)}
-      >
+        onClick={() => history.push(Pages.forgetPassword)}>
         {Str.forget + Str.password}
       </Button>
     </>

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { Button, Form, Card } from "react-bootstrap";
-import Str from "../config/zh-tw.json";
-import { updatePassword } from "../net/memberAPI";
-import Pages from "./Pages.json";
+import { Button, Form, Card } from 'react-bootstrap';
+import Str from '../config/zh-tw.json';
+import { updatePassword } from '../net/memberAPI';
+import Pages from './Pages.json';
 
 export default function CreateAccountPage({ history, location }) {
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function CreateAccountPage({ history, location }) {
 
   return (
     <div className="CreateAccount" align="center">
-      <Card style={{ width: "20rem" }} border="Dark">
+      <Card style={{ width: '20rem' }} border="Dark">
         <Card.Body>
           <Form>
             <PasswordBar password={password} setPassword={setPassword} />
@@ -33,8 +33,7 @@ export default function CreateAccountPage({ history, location }) {
                   password: password,
                 });
                 history.push(Pages.login);
-              }}
-            >
+              }}>
               {Str.update}
             </Button>
           </Form>

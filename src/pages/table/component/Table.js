@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Table } from 'react-bootstrap';
 
 export default function ShowTable({ head, datas }) {
   return (
@@ -28,7 +28,7 @@ function TableBody({ datas }) {
     TBody.push(
       <tr key={key}>
         <TableData data={datas[key]} />
-      </tr>
+      </tr>,
     );
   });
   return <tbody>{TBody}</tbody>;
@@ -72,9 +72,8 @@ function TableItem({ item }) {
   return (
     <td
       onDoubleClick={() => {
-        setItem(..."測試");
-      }}
-    >
+        setItem(...'測試');
+      }}>
       {_item}
     </td>
   );

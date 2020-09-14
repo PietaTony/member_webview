@@ -1,19 +1,18 @@
-import React from "react";
-import { Nav, Col, Image, Button, Breadcrumb } from "react-bootstrap";
-import { TypeClass } from "../../config/TypeList";
+import React from 'react';
+import { Nav, Col, Image, Button, Breadcrumb } from 'react-bootstrap';
+import { TypeClass } from '../../config/TypeList';
 
 const rootPath = process.env.PUBLIC_URL;
 export function LeftSideBar({ width }) {
   return (
     <>
       <Col xs={6} md={4}>
-        <Image src={rootPath + "/images/DontMove.png"} roundedCircle />
+        <Image src={rootPath + '/images/DontMove.png'} roundedCircle />
       </Col>
       <Nav
         className="col-md-12  d-md-block  sidebar"
         activeKey="/home"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
+        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
         <div className="sidebar-sticky"></div>
         <Nav.Item>
           <Nav.Link href="/home">Active</Nav.Link>
