@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 import Icon from '../Icon';
 
 class InsertMenu extends Component {
@@ -25,15 +23,15 @@ class InsertMenu extends Component {
   };
 
   unhoverTool = (type) => {
-    if (this.state.hoveredTool == type) {
+    if (this.state.hoveredTool === type) {
       this.setState({ hoveredTool: null });
     }
   };
 
   render() {
-    let { currentTool, tools } = this.props;
-    let { menuOpened, hoveredTool } = this.state;
-    let keys = Object.keys(tools);
+    const { currentTool, tools } = this.props;
+    const { menuOpened, hoveredTool } = this.state;
+    const keys = Object.keys(tools);
 
     return (
       <div
@@ -53,15 +51,16 @@ class InsertMenu extends Component {
         <ul style={styles.toolBox}>
           {keys.map((type, i) => (
             <li
+              key={i}
               style={{
                 ...styles.toolBoxItem,
-                ...(currentTool === type ? styles.currentToolboxItem : {}),
-                ...(hoveredTool === type ? styles.currentToolboxItem : {}),
+                ...(currentTool === type || hoveredTool === type
+                  ? styles.currentToolboxItem
+                  : {}),
               }}
               onMouseOver={() => this.hoverTool(type)}
               onMouseOut={() => this.unhoverTool(type)}
-              onMouseDown={this.props.onSelect.bind(this, type)}
-              key={i}>
+              onMouseDown={this.props.onSelect.bind(this, type)}>
               {tools[type].meta.icon}
             </li>
           ))}

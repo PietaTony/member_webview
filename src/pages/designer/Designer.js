@@ -596,7 +596,7 @@ class Designer extends Component {
   }
 }
 
-export const styles = {
+const styles = {
   container: {
     position: 'relative',
     display: 'flex',
