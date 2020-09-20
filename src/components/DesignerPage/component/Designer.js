@@ -20,8 +20,6 @@ export default class Designer extends Component {
       image: Image,
     },
     snapToGrid: 1,
-    svgStyle: {},
-    insertMenu: InsertMenu,
   };
 
   state = {
@@ -197,13 +195,13 @@ export default class Designer extends Component {
   }
 
   getOffset() {
-    let parent = this.svgElement.getBoundingClientRect();
-    let { canvasWidth, canvasHeight } = this.getCanvas();
+    const parent = this.svgElement.getBoundingClientRect();
+    const { width, height } = this.props;
     return {
       x: parent.left,
       y: parent.top,
-      width: canvasWidth,
-      height: canvasHeight,
+      width: width,
+      height: height,
     };
   }
 
@@ -219,14 +217,13 @@ export default class Designer extends Component {
   updateHandler(index, object) {
     let target = this.objectRefs[index];
     let bbox = target.getBoundingClientRect();
-    let { canvasOffsetX, canvasOffsetY } = this.getCanvas();
 
     let handler = {
       ...this.state.handler,
       width: object.width || bbox.width,
       height: object.height || bbox.height,
-      top: object.y + canvasOffsetY,
-      left: object.x + canvasOffsetX,
+      top: object.y,
+      left: object.x,
       rotate: object.rotate,
     };
 
@@ -244,21 +241,21 @@ export default class Designer extends Component {
     });
   }
 
-  snapCoordinates({ x, y }) {
-    let { snapToGrid } = this.props;
-    return {
-      x: x - (x % snapToGrid),
-      y: y - (y % snapToGrid),
-    };
-  }
-
   getMouseCoords({ clientX, clientY }) {
-    let coords = this.applyOffset({
+    const coords = this.applyOffset({
       x: clientX,
       y: clientY,
     });
 
-    return this.snapCoordinates(coords);
+    const snapCoordinates = ({ x, y }) => {
+      const { snapToGrid } = this.props;
+      return {
+        x: x - (x % snapToGrid),
+        y: y - (y % snapToGrid),
+      };
+    };
+
+    return snapCoordinates(coords);
   }
 
   onDrag(event) {
@@ -314,7 +311,7 @@ export default class Designer extends Component {
         left -= offset.x;
         top -= offset.y;
 
-        let isOverlapped =
+        const isOverlapped =
           mouse.x > left &&
           mouse.x < left + width &&
           mouse.y > top &&
@@ -358,35 +355,21 @@ export default class Designer extends Component {
     return objectTypes[type];
   }
 
-  getCanvas() {
-    let { width, height } = this.props;
-    let { canvasWidth = width, canvasHeight = height } = this.props;
-    return {
-      width,
-      height,
-      canvasWidth,
-      canvasHeight,
-      canvasOffsetX: (canvasWidth - width) / 2,
-      canvasOffsetY: (canvasHeight - height) / 2,
-    };
-  }
-
   renderSVG() {
-    let canvas = this.getCanvas();
-    let { width, height } = canvas;
-    let { background, objects, objectTypes } = this.props;
+    const { width, height, background, objects, objectTypes } = this.props;
 
     return (
       <SVGRenderer
         background={background}
         width={width}
-        canvas={canvas}
         height={height}
         objects={objects}
         onMouseOver={this.showHandler.bind(this)}
         objectTypes={objectTypes}
         objectRefs={this.objectRefs}
-        onRender={(ref) => (this.svgElement = ref)}
+        onRender={(ref) => {
+          this.svgElement = ref;
+        }}
         onMouseDown={this.newObject.bind(this)}
       />
     );
@@ -502,13 +485,13 @@ export default class Designer extends Component {
       selectedTool,
     } = this.state;
 
-    let { objects, objectTypes, insertMenu: InsertMenuComponent } = this.props;
+    let { objects, objectTypes } = this.props;
 
     let currentObject = objects[selectedObjectIndex],
       isEditMode = mode === modes.EDIT_OBJECT,
       showPropertyPanel = selectedObjectIndex !== null;
 
-    let { width, height } = this.getCanvas();
+    const { width, height } = this.props;
 
     let objectComponent, objectWithInitial, ObjectEditor;
     if (currentObject) {
@@ -535,13 +518,11 @@ export default class Designer extends Component {
           onMouseMove={this.onDrag.bind(this)}
           onMouseUp={this.stopDrag.bind(this)}>
           {/* Left Panel: Displays insertion tools (shapes, images, etc.) */}
-          {InsertMenuComponent && (
-            <InsertMenuComponent
-              tools={objectTypes}
-              currentTool={selectedTool}
-              onSelect={this.selectTool.bind(this)}
-            />
-          )}
+          <InsertMenu
+            tools={objectTypes}
+            currentTool={selectedTool}
+            onSelect={this.selectTool.bind(this)}
+          />
 
           {/* Center Panel: Displays the preview */}
           <div style={styles.canvasContainer}>

@@ -72,7 +72,7 @@ class InsertMenu extends Component {
 
 const styles = {
   insertMenu: {
-    height: 60,
+    height: 40,
     width: 40,
     overflow: 'hidden',
   },

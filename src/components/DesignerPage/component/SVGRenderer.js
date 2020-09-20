@@ -6,13 +6,12 @@ class SVGRenderer extends Component {
   };
 
   getObjectComponent(type) {
-    let { objectTypes } = this.props;
-    return objectTypes[type];
+    return this.props.objectTypes[type];
   }
 
   renderObject(object, index) {
-    let { objectRefs, onMouseOver } = this.props;
-    let Renderer = this.getObjectComponent(object.type);
+    const { objectRefs, onMouseOver } = this.props;
+    const Renderer = this.getObjectComponent(object.type);
     return (
       <Renderer
         onRender={(ref) => (objectRefs[index] = ref)}
@@ -25,28 +24,22 @@ class SVGRenderer extends Component {
   }
 
   render() {
-    let {
+    const {
       background,
       objects,
-      svgStyle,
-      canvas,
+      width,
+      height,
       onMouseDown,
       onRender,
     } = this.props;
-    let { width, height, canvasOffsetX, canvasOffsetY } = canvas;
 
-    let style = {
+    const style = {
       ...styles.canvas,
       ...(background
         ? {
             backgroundColor: background,
           }
         : styles.grid),
-      ...{
-        ...svgStyle,
-        marginTop: canvasOffsetY,
-        marginLeft: canvasOffsetX,
-      },
     };
 
     return (
@@ -75,6 +68,7 @@ export const styles = {
       'iNGN0Y3RjciPjwvcmVjdD4KPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIG' +
       'ZpbGw9IiNGN0Y3RjciPjwvcmVjdD4KPC9zdmc+)',
     backgroundSize: 'auto',
+    border: '1px solid',
   },
 };
 

@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
-import Pdf from 'react-to-pdf';
+import ReactToPdf from 'react-to-pdf';
 import { Button } from 'react-bootstrap';
+
 import Designer from './component/Designer';
+import './style.css';
 
 export default function DesignerPage() {
   const [objects, setObjects] = useState([]);
+  const [width, setWidth] = useState(400);
+  const [height, setHeight] = useState(350);
   const ref = React.createRef();
 
   return (
-    <div style={style.main}>
+    <div className="designer_page_container">
+      <div>
+        <label>
+          Width:
+          <input
+            name="width"
+            type="number"
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}></input>
+        </label>
+        <label>
+          Height:
+          <input
+            name="height"
+            type="number"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}></input>
+        </label>
+      </div>
       <div ref={ref}>
         <Designer
-          width={400}
-          height={350}
+          width={width}
+          height={height}
           objects={objects}
           onUpdate={(newObjects) => setObjects(newObjects)}
         />
       </div>
-      <Pdf targetRef={ref} filename="code-example.pdf">
+      <ReactToPdf targetRef={ref} filename="code-example.pdf">
         {({ toPdf }) => <Button onClick={toPdf}>Generate Pdf</Button>}
-      </Pdf>
+      </ReactToPdf>
     </div>
   );
 }
-
-const style = {
-  main: {
-    'margin-left': '180px' /* Same as the width of the sidenav */,
-    'font-size': '28px' /* Increased text to enable scrolling */,
-    'padding': '0px 10px',
-  },
-};
