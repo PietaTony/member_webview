@@ -17,7 +17,7 @@ export default class Circle extends Vector {
   };
 
   render() {
-    let { object } = this.props;
+    const { object } = this.props;
     return (
       <ellipse
         style={this.getStyle()}

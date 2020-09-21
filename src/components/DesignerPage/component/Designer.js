@@ -295,19 +295,19 @@ export default class Designer extends Component {
   }
 
   detectOverlappedObjects(event) {
-    let { currentObjectIndex } = this.state;
-    let mouse = this.getMouseCoords(event);
+    const { currentObjectIndex } = this.state;
+    const mouse = this.getMouseCoords(event);
 
-    let refs = this.objectRefs,
-      keys = Object.keys(refs),
-      offset = this.getOffset();
+    const refs = this.objectRefs;
+    const keys = Object.keys(refs);
+    const offset = this.getOffset();
 
-    let currentRect = refs[currentObjectIndex].getBoundingClientRect();
+    const currentRect = refs[currentObjectIndex].getBoundingClientRect();
 
     keys
       .filter((object, index) => index !== currentObjectIndex)
       .forEach((key) => {
-        let rect = refs[key].getBoundingClientRect();
+        const rect = refs[key].getBoundingClientRect();
         let { left, top, width, height } = rect;
 
         left -= offset.x;

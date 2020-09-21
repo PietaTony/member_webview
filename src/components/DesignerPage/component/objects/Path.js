@@ -23,9 +23,9 @@ export default class Path extends Vector {
   };
 
   buildPath(object) {
-    let { path } = object;
+    const { path } = object;
 
-    let curves = path.map(
+    const curves = path.map(
       ({ x1, y1, x2, y2, x, y }, i) => `C ${x1} ${y1}, ${x2} ${y2}, ${x} ${y}`,
     );
 
@@ -46,8 +46,8 @@ export default class Path extends Vector {
   }
 
   render() {
-    let { object } = this.props;
-    let fill = object.closed ? object.fill : 'transparent';
+    const { object } = this.props;
+    const fill = object.closed ? object.fill : 'transparent';
     return (
       <path
         style={this.getStyle(object)}
