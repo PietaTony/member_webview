@@ -12,22 +12,21 @@ export default class Vector extends Component {
   static panels = [SizePanel, TextPanel, StylePanel, ImagePanel, ArrangePanel];
 
   getStyle() {
-    let { object } = this.props;
     return {
-      mixBlendMode: object.blendMode,
+      mixBlendMode: this.props.object.blendMode,
     };
   }
 
   getTransformMatrix({ rotate, x, y, width, height }) {
     if (rotate) {
-      let centerX = width / 2 + x;
-      let centerY = height / 2 + y;
+      const centerX = width / 2 + x;
+      const centerY = height / 2 + y;
       return `rotate(${rotate} ${centerX} ${centerY})`;
     }
   }
 
   getObjectAttributes() {
-    let { object, onRender, ...rest } = this.props;
+    const { object, onRender, ...rest } = this.props;
     return {
       ...object,
       transform: this.getTransformMatrix(object),

@@ -1,4 +1,4 @@
-export { Preview } from './Preview';
+export { default as Preview } from './Preview';
 export { Vector, Path, Rect, Circle, Text, Image } from './objects';
 export {
   TextPanel,
@@ -7,4 +7,4 @@ export {
   ArrangePanel,
   ImagePanel,
 } from './panels';
-export { Designer } from './Designer';
+export { default as Designer } from './Designer';

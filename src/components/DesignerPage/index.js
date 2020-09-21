@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactToPdf from 'react-to-pdf';
 import { Button } from 'react-bootstrap';
 
-import Designer from './component/Designer';
+import { Designer } from './component';
 import './style.css';
 
 export default function DesignerPage() {
@@ -31,7 +31,7 @@ export default function DesignerPage() {
             onChange={(e) => setHeight(e.target.value)}></input>
         </label>
       </div>
-      <div ref={ref}>
+      <div ref={ref} className="designer">
         <Designer
           width={width}
           height={height}
@@ -39,6 +39,7 @@ export default function DesignerPage() {
           onUpdate={(newObjects) => setObjects(newObjects)}
         />
       </div>
+      <br />
       <ReactToPdf targetRef={ref} filename="code-example.pdf">
         {({ toPdf }) => <Button onClick={toPdf}>Generate Pdf</Button>}
       </ReactToPdf>

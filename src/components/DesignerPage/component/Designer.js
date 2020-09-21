@@ -7,7 +7,7 @@ import SVGRenderer from './SVGRenderer';
 import Handler from './Handler';
 import { modes } from './constants';
 import * as actions from './actions';
-import { Text, Path, Rect, Circle, Image } from './objects';
+import { Text, Path, Rect, Circle, Image, Qrcode, Barcode } from './objects';
 import PanelList from './panels/PanelList';
 
 export default class Designer extends Component {
@@ -18,6 +18,8 @@ export default class Designer extends Component {
       circle: Circle,
       polygon: Path,
       image: Image,
+      qrcode: Qrcode,
+      barcode: Barcode,
     },
     snapToGrid: 1,
   };
@@ -351,8 +353,7 @@ export default class Designer extends Component {
   }
 
   getObjectComponent(type) {
-    let { objectTypes } = this.props;
-    return objectTypes[type];
+    return this.props.objectTypes[type];
   }
 
   renderSVG() {
