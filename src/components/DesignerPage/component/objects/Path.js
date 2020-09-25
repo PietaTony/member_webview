@@ -1,5 +1,5 @@
 import React from 'react';
-import { modes } from '../constants';
+import { MODES } from '../constants';
 import Icon from '../Icon';
 
 import Vector from './Vector';
@@ -17,7 +17,7 @@ export default class Path extends Vector {
       stroke: 'gray',
       strokeWidth: 1,
     },
-    mode: modes.DRAW_PATH,
+    mode: MODES.DRAW_PATH,
     icon: <Icon icon={'polygon'} size={30} />,
     editor: BezierEditor,
   };

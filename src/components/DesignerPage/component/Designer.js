@@ -3,12 +3,12 @@ import _ from 'lodash';
 import { HotKeys } from 'react-hotkeys';
 
 import InsertMenu from './panels/InsertMenu';
+import PanelList from './panels/PanelList';
 import SVGRenderer from './SVGRenderer';
 import Handler from './Handler';
-import { modes } from './constants';
+import { MODES } from './constants';
 import * as actions from './actions';
 import { Text, Path, Rect, Circle, Image, Qrcode, Barcode } from './objects';
-import PanelList from './panels/PanelList';
 
 export default class Designer extends Component {
   static defaultProps = {
@@ -25,7 +25,7 @@ export default class Designer extends Component {
   };
 
   state = {
-    mode: modes.FREE,
+    mode: MODES.FREE,
     handler: {
       top: 200,
       left: 200,
@@ -47,16 +47,16 @@ export default class Designer extends Component {
     closePath: ['enter'],
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.objectRefs = {};
   }
 
   showHandler(index) {
-    let { mode } = this.state;
-    let { objects } = this.props;
-    let object = objects[index];
+    const { mode } = this.state;
+    const { objects } = this.props;
+    const object = objects[index];
 
-    if (mode !== modes.FREE) {
+    if (mode !== MODES.FREE) {
       return;
     }
 
@@ -68,8 +68,8 @@ export default class Designer extends Component {
   }
 
   hideHandler() {
-    let { mode } = this.state;
-    if (mode === modes.FREE) {
+    const { mode } = this.state;
+    if (mode === MODES.FREE) {
       this.setState({
         showHandler: false,
       });
@@ -77,9 +77,9 @@ export default class Designer extends Component {
   }
 
   getStartPointBundle(event, object) {
-    let { currentObjectIndex } = this.state;
-    let { objects } = this.props;
-    let mouse = this.getMouseCoords(event);
+    const { currentObjectIndex } = this.state;
+    const { objects } = this.props;
+    const mouse = this.getMouseCoords(event);
     object = object || objects[currentObjectIndex];
     return {
       clientX: mouse.x,
@@ -93,7 +93,7 @@ export default class Designer extends Component {
   }
 
   startDrag(mode, event) {
-    let { currentObjectIndex } = this.state;
+    const { currentObjectIndex } = this.state;
     this.setState({
       mode: mode,
       startPoint: this.getStartPointBundle(event),
@@ -108,14 +108,14 @@ export default class Designer extends Component {
   }
 
   generateUUID() {
-    var d = new Date().getTime();
+    let d = new Date().getTime();
     if (window.performance && typeof window.performance.now === 'function') {
       d += performance.now(); //use high-precision timer if available
     }
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
       /[xy]/g,
       function (c) {
-        var r = (d + Math.random() * 16) % 16 | 0;
+        const r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
       },
@@ -124,19 +124,19 @@ export default class Designer extends Component {
   }
 
   newObject(event) {
-    let { mode, selectedTool } = this.state;
+    const { mode, selectedTool } = this.state;
 
     this.resetSelection(event);
 
-    if (mode !== modes.DRAW) {
+    if (mode !== MODES.DRAW) {
       return;
     }
 
-    let { meta } = this.getObjectComponent(selectedTool);
-    let mouse = this.getMouseCoords(event);
+    const { meta } = this.getObjectComponent(selectedTool);
+    const mouse = this.getMouseCoords(event);
 
-    let { objects, onUpdate } = this.props;
-    let object = {
+    const { objects, onUpdate } = this.props;
+    const object = {
       ...meta.initial,
       type: selectedTool,
       x: mouse.x,
@@ -150,17 +150,17 @@ export default class Designer extends Component {
       currentObjectIndex: objects.length,
       selectedObjectIndex: objects.length,
       startPoint: this.getStartPointBundle(event, object),
-      mode: meta.editor ? modes.EDIT_OBJECT : modes.SCALE,
+      mode: meta.editor ? MODES.EDIT_OBJECT : MODES.SCALE,
       selectedTool: null,
     });
   }
 
   updatePath(object) {
-    let { path } = object;
-    let diffX = object.x - object.moveX;
-    let diffY = object.y - object.moveY;
+    const { path } = object;
+    const diffX = object.x - object.moveX;
+    const diffY = object.y - object.moveY;
 
-    let newPath = path.map(({ x1, y1, x2, y2, x, y }) => ({
+    const newPath = path.map(({ x1, y1, x2, y2, x, y }) => ({
       x1: diffX + x1,
       y1: diffY + y1,
       x2: diffX + x2,
@@ -178,11 +178,11 @@ export default class Designer extends Component {
   }
 
   updateObject(objectIndex, changes, updatePath) {
-    let { objects, onUpdate } = this.props;
+    const { objects, onUpdate } = this.props;
     onUpdate(
       objects.map((object, index) => {
         if (index === objectIndex) {
-          let newObject = {
+          const newObject = {
             ...object,
             ...changes,
           };
@@ -208,7 +208,7 @@ export default class Designer extends Component {
   }
 
   applyOffset(bundle) {
-    let offset = this.getOffset();
+    const offset = this.getOffset();
     return {
       ...bundle,
       x: bundle.x - offset.x,
@@ -217,8 +217,8 @@ export default class Designer extends Component {
   }
 
   updateHandler(index, object) {
-    let target = this.objectRefs[index];
-    let bbox = target.getBoundingClientRect();
+    const target = this.objectRefs[index];
+    const bbox = target.getBoundingClientRect();
 
     let handler = {
       ...this.state.handler,
@@ -230,7 +230,7 @@ export default class Designer extends Component {
     };
 
     if (!object.width) {
-      let offset = this.getOffset();
+      const offset = this.getOffset();
       handler = {
         ...handler,
         left: bbox.left - offset.x,
@@ -261,23 +261,23 @@ export default class Designer extends Component {
   }
 
   onDrag(event) {
-    let { currentObjectIndex, startPoint, mode } = this.state;
-    let { objects } = this.props;
-    let object = objects[currentObjectIndex];
-    let mouse = this.getMouseCoords(event);
+    const { currentObjectIndex, startPoint, mode } = this.state;
+    const { objects } = this.props;
+    const object = objects[currentObjectIndex];
+    const mouse = this.getMouseCoords(event);
 
-    let { scale, rotate, drag } = actions;
+    const { scale, rotate, drag } = actions;
 
-    let map = {
-      [modes.SCALE]: scale,
-      [modes.ROTATE]: rotate,
-      [modes.DRAG]: drag,
+    const MAP = {
+      [MODES.SCALE]: scale,
+      [MODES.ROTATE]: rotate,
+      [MODES.DRAG]: drag,
     };
 
-    let action = map[mode];
+    const action = MAP[mode];
 
     if (action) {
-      let newObject = action({
+      const newObject = action({
         object,
         startPoint,
         mouse,
@@ -328,25 +328,25 @@ export default class Designer extends Component {
   }
 
   stopDrag() {
-    let { mode } = this.state;
+    const { mode } = this.state;
 
-    if (_.includes([modes.DRAG, modes.ROTATE, modes.SCALE], mode)) {
+    if (_.includes([MODES.DRAG, MODES.ROTATE, MODES.SCALE], mode)) {
       this.setState({
-        mode: modes.FREE,
+        mode: MODES.FREE,
       });
     }
   }
 
   showEditor() {
-    let { selectedObjectIndex } = this.state;
+    const { selectedObjectIndex } = this.state;
 
-    let { objects } = this.props,
-      currentObject = objects[selectedObjectIndex],
-      objectComponent = this.getObjectComponent(currentObject.type);
+    const { objects } = this.props;
+    const currentObject = objects[selectedObjectIndex];
+    const objectComponent = this.getObjectComponent(currentObject.type);
 
     if (objectComponent.meta.editor) {
       this.setState({
-        mode: modes.EDIT_OBJECT,
+        mode: MODES.EDIT_OBJECT,
         showHandler: false,
       });
     }
@@ -379,7 +379,7 @@ export default class Designer extends Component {
   selectTool(tool) {
     this.setState({
       selectedTool: tool,
-      mode: modes.DRAW,
+      mode: MODES.DRAW,
       currentObjectIndex: null,
       showHandler: false,
       handler: null,
@@ -387,7 +387,7 @@ export default class Designer extends Component {
   }
 
   handleObjectChange(key, value) {
-    let { selectedObjectIndex } = this.state;
+    const { selectedObjectIndex } = this.state;
     // console.log(this.state, key, value)
     this.updateObject(selectedObjectIndex, {
       [key]: value,
@@ -395,24 +395,26 @@ export default class Designer extends Component {
   }
 
   handleArrange(arrange) {
-    let { selectedObjectIndex } = this.state;
-    let { objects } = this.props;
-    let object = objects[selectedObjectIndex];
+    const { selectedObjectIndex } = this.state;
+    const { objects } = this.props;
+    const object = objects[selectedObjectIndex];
 
-    let arrangers = {
+    const arrangers = {
       front: (rest, object) => [[...rest, object], rest.length],
       back: (rest, object) => [[object, ...rest], 0],
     };
 
-    let rest = objects.filter((object, index) => selectedObjectIndex !== index);
+    const rest = objects.filter(
+      (object, index) => selectedObjectIndex !== index,
+    );
 
     this.setState(
       {
         selectedObjectIndex: null,
       },
       () => {
-        let arranger = arrangers[arrange];
-        let [arranged, newIndex] = arranger(rest, object);
+        const arranger = arrangers[arrange];
+        const [arranged, newIndex] = arranger(rest, object);
         this.props.onUpdate(arranged);
         this.setState({
           selectedObjectIndex: newIndex,
@@ -422,10 +424,12 @@ export default class Designer extends Component {
   }
 
   removeCurrent() {
-    let { selectedObjectIndex } = this.state;
-    let { objects } = this.props;
+    const { selectedObjectIndex } = this.state;
+    const { objects } = this.props;
 
-    let rest = objects.filter((object, index) => selectedObjectIndex !== index);
+    const rest = objects.filter(
+      (object, index) => selectedObjectIndex !== index,
+    );
 
     this.setState(
       {
@@ -442,15 +446,15 @@ export default class Designer extends Component {
   }
 
   moveSelectedObject(attr, points, event, key) {
-    let { selectedObjectIndex } = this.state;
-    let { objects } = this.props;
-    let object = objects[selectedObjectIndex];
+    const { selectedObjectIndex } = this.state;
+    const { objects } = this.props;
+    const object = objects[selectedObjectIndex];
 
     if (key.startsWith('shift')) {
       points *= 10;
     }
 
-    let changes = {
+    const changes = {
       ...object,
       [attr]: object[attr] + points,
     };
@@ -460,13 +464,13 @@ export default class Designer extends Component {
   }
 
   getKeymapHandlers() {
-    let handlers = {
+    const handlers = {
       removeObject: this.removeCurrent.bind(this),
       moveLeft: this.moveSelectedObject.bind(this, 'x', -1),
       moveRight: this.moveSelectedObject.bind(this, 'x', 1),
       moveUp: this.moveSelectedObject.bind(this, 'y', -1),
       moveDown: this.moveSelectedObject.bind(this, 'y', 1),
-      closePath: () => this.setState({ mode: modes.FREE }),
+      closePath: () => this.setState({ mode: MODES.FREE }),
     };
 
     return _.mapValues(handlers, (handler) => (event, key) => {
@@ -478,7 +482,7 @@ export default class Designer extends Component {
   }
 
   render() {
-    let {
+    const {
       showHandler,
       handler,
       mode,
@@ -486,11 +490,11 @@ export default class Designer extends Component {
       selectedTool,
     } = this.state;
 
-    let { objects, objectTypes } = this.props;
+    const { objects, objectTypes } = this.props;
 
-    let currentObject = objects[selectedObjectIndex],
-      isEditMode = mode === modes.EDIT_OBJECT,
-      showPropertyPanel = selectedObjectIndex !== null;
+    const currentObject = objects[selectedObjectIndex];
+    const isEditMode = mode === MODES.EDIT_OBJECT;
+    const showPropertyPanel = selectedObjectIndex !== null;
 
     const { width, height } = this.props;
 
@@ -534,7 +538,7 @@ export default class Designer extends Component {
                 onUpdate={(object) =>
                   this.updateObject(selectedObjectIndex, object)
                 }
-                onClose={() => this.setState({ mode: modes.FREE })}
+                onClose={() => this.setState({ mode: MODES.FREE })}
                 width={width}
                 height={height}
               />
@@ -550,9 +554,9 @@ export default class Designer extends Component {
                 canRotate={_(currentObject).has('rotate')}
                 onMouseLeave={this.hideHandler.bind(this)}
                 onDoubleClick={this.showEditor.bind(this)}
-                onDrag={this.startDrag.bind(this, modes.DRAG)}
-                onResize={this.startDrag.bind(this, modes.SCALE)}
-                onRotate={this.startDrag.bind(this, modes.ROTATE)}
+                onDrag={this.startDrag.bind(this, MODES.DRAG)}
+                onResize={this.startDrag.bind(this, MODES.SCALE)}
+                onRotate={this.startDrag.bind(this, MODES.ROTATE)}
               />
             )}
 

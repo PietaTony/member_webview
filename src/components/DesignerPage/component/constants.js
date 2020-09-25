@@ -6,7 +6,7 @@ const DRAW = 4;
 const TYPE = 5;
 const EDIT_OBJECT = 6;
 
-export const modes = {
+export const MODES = {
   FREE,
   DRAG,
   SCALE,

@@ -14,7 +14,7 @@ class Preview extends Component {
     },
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.objectRefs = {};
   }
 

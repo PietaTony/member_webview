@@ -20,7 +20,7 @@ export default class Text extends Vector {
   };
 
   getStyle() {
-    let { object } = this.props;
+    const { object } = this.props;
     return {
       ...super.getStyle(),
       dominantBaseline: 'central',

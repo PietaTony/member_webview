@@ -13,7 +13,7 @@ class BezierEditor extends Component {
     };
   }
 
-  componentWillMount(props) {
+  componentDidMount(props) {
     let { object } = this.props;
     if (!object.path.length) {
       this.props.onUpdate({

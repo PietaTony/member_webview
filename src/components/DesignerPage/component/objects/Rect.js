@@ -18,7 +18,7 @@ export default class Rect extends Vector {
   };
 
   render() {
-    let { object } = this.props;
+    const { object } = this.props;
     return (
       <rect
         style={this.getStyle()}
