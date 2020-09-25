@@ -15,9 +15,7 @@
     "react-hotkeys": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-table": "^7.5.0",
-    "react-to-pdf": "0.0.11",
-    "yarn": "^1.22.4"
+    "react-to-pdf": "0.0.11"
   },
   "scripts": {
     "start": "react-scripts start",
