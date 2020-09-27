@@ -1,6 +1,6 @@
 import React from 'react';
-// import QRCode from 'qrcode.react';
 
+import QRCode from '../../../Qrcode';
 import Icon from '../Icon';
 import Vector from './Vector';
 
@@ -19,14 +19,14 @@ export default class Qrcode extends Vector {
 
   render() {
     const { object } = this.props;
-    return (
-      <image
-        xlinkHref={object.xlinkHref}
-        {...this.getObjectAttributes()}
-        width={object.width}
-        height={object.height}
-      />
-    );
-    // return <QRCode {...this.getObjectAttributes()} value={object.value} />;
+    // return (
+    //   <image
+    //     xlinkHref={object.xlinkHref}
+    //     {...this.getObjectAttributes()}
+    //     width={object.width}
+    //     height={object.height}
+    //   />
+    // );
+    return <QRCode {...this.getObjectAttributes()} value={object.value} />;
   }
 }

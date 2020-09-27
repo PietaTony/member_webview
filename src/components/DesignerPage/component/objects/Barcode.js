@@ -1,6 +1,6 @@
 import React from 'react';
-import Barcode from 'react-barcode';
 
+import Barcode from '../../../Barcode';
 import Icon from '../Icon';
 import Vector from './Vector';
 
@@ -22,6 +22,7 @@ export default class BarCode extends Vector {
         value={object.value}
         width={object.width}
         height={object.height}
+        text=" "
       />
     );
   }
