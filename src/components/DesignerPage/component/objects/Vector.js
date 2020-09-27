@@ -6,10 +6,18 @@ import {
   StylePanel,
   ArrangePanel,
   ImagePanel,
+  CodeValuePanel,
 } from '../panels';
 
 export default class Vector extends Component {
-  static panels = [SizePanel, TextPanel, StylePanel, ImagePanel, ArrangePanel];
+  static panels = [
+    SizePanel,
+    TextPanel,
+    CodeValuePanel,
+    StylePanel,
+    ImagePanel,
+    ArrangePanel,
+  ];
 
   getStyle() {
     return {

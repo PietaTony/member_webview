@@ -396,7 +396,7 @@ export default class Designer extends Component {
 
   handleArrange(arrange) {
     const { selectedObjectIndex } = this.state;
-    const { objects } = this.props;
+    const { objects, onUpdate } = this.props;
     const object = objects[selectedObjectIndex];
 
     const arrangers = {
@@ -415,7 +415,7 @@ export default class Designer extends Component {
       () => {
         const arranger = arrangers[arrange];
         const [arranged, newIndex] = arranger(rest, object);
-        this.props.onUpdate(arranged);
+        onUpdate(arranged);
         this.setState({
           selectedObjectIndex: newIndex,
         });
@@ -425,7 +425,7 @@ export default class Designer extends Component {
 
   removeCurrent() {
     const { selectedObjectIndex } = this.state;
-    const { objects } = this.props;
+    const { objects, onUpdate } = this.props;
 
     const rest = objects.filter(
       (object, index) => selectedObjectIndex !== index,
@@ -440,7 +440,7 @@ export default class Designer extends Component {
       },
       () => {
         this.objectRefs = {};
-        this.props.onUpdate(rest);
+        onUpdate(rest);
       },
     );
   }

@@ -4,3 +4,4 @@ export { default as StylePanel } from './StylePanel';
 export { default as SizePanel } from './SizePanel';
 export { default as InsertMenu } from './InsertMenu';
 export { default as ImagePanel } from './ImagePanel';
+export { default as CodeValuePanel } from './CodeValuePanel';

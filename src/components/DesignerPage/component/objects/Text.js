@@ -47,10 +47,10 @@ export default class Text extends Vector {
     return (
       <text
         style={this.getStyle()}
-        {...restOfAttributes}
         textAnchor="right"
+        fontFamily={object.fontFamily}
         fontSize={object.fontSize}
-        fontFamily={object.fontFamily}>
+        {...restOfAttributes}>
         {object.text}
       </text>
     );

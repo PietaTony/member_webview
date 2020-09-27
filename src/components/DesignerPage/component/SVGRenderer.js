@@ -14,7 +14,9 @@ class SVGRenderer extends Component {
     const Renderer = this.getObjectComponent(object.type);
     return (
       <Renderer
-        onRender={(ref) => (objectRefs[index] = ref)}
+        onRender={(ref) => {
+          objectRefs[index] = ref;
+        }}
         onMouseOver={onMouseOver.bind(this, index)}
         object={object}
         key={index}
@@ -48,8 +50,7 @@ class SVGRenderer extends Component {
         ref={onRender}
         width={width}
         height={height}
-        style={style}
-        >
+        style={style}>
         {objects.map(this.renderObject.bind(this))}
       </svg>
     );

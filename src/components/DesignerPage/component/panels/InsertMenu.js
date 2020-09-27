@@ -29,7 +29,7 @@ class InsertMenu extends Component {
   };
 
   render() {
-    const { currentTool, tools } = this.props;
+    const { currentTool, tools, onSelect } = this.props;
     const { menuOpened, hoveredTool } = this.state;
     const keys = Object.keys(tools);
 
@@ -60,7 +60,7 @@ class InsertMenu extends Component {
               }}
               onMouseOver={() => this.hoverTool(type)}
               onMouseOut={() => this.unhoverTool(type)}
-              onMouseDown={this.props.onSelect.bind(this, type)}>
+              onMouseDown={onSelect.bind(this, type)}>
               {tools[type].meta.icon}
             </li>
           ))}

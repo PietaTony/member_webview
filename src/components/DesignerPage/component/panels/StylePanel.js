@@ -28,7 +28,7 @@ export default class StylePanel extends Component {
   ];
 
   render() {
-    let { object } = this.props;
+    const { object } = this.props;
     return (
       <PropertyGroup>
         <Columns label="Fill" showIf={_.has(object, 'fill')}>
@@ -63,7 +63,7 @@ export default class StylePanel extends Component {
             />
           </Column>
         </Columns>
-        <Columns label="Blending">
+        <Columns label="Blending" showIf={_.has(object, 'blendMode')}>
           <Column>
             <select
               style={styles.select}

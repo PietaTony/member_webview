@@ -19,8 +19,8 @@ export default class Image extends Vector {
     const { object } = this.props;
     return (
       <image
-        xlinkHref={object.xlinkHref}
         {...this.getObjectAttributes()}
+        xlinkHref={object.xlinkHref}
         width={object.width}
         height={object.height}
       />

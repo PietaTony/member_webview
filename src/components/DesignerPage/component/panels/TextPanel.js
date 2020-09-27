@@ -67,7 +67,7 @@ export default class TextPanel extends Component {
       : 0;
 
   render() {
-    let { object } = this.props;
+    const { object, onChange } = this.props;
     return (
       <PropertyGroup showIf={_.has(object, 'text')}>
         <div style={styles.columns}>
@@ -128,7 +128,7 @@ export default class TextPanel extends Component {
           <div style={{ ...styles.row, paddingTop: 25, paddingRight: 10 }}>
             <input
               style={{ ...styles.input, ...styles.textInput }}
-              onChange={(e) => this.props.onChange('text', e.target.value)}
+              onChange={(e) => onChange('text', e.target.value)}
               value={object.text}
             />
           </div>

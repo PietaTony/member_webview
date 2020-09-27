@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import styles from './styles';
 
-class PanelList extends Component {
+export default class PanelList extends Component {
   render() {
-    let { objectComponent, id } = this.props;
+    const { objectComponent, id } = this.props;
 
     return (
       <div style={{ ...styles.propertyPanel }}>
@@ -15,5 +15,3 @@ class PanelList extends Component {
     );
   }
 }
-
-export default PanelList;
