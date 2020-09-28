@@ -1,9 +1,9 @@
 import api from './api';
 
-const svgAPI = {};
+const templateAPI = {};
 
-svgAPI.getAllSVG = () => {
-  const url = `/svg`;
+templateAPI.getAllTemplate = () => {
+  const url = `/template`;
   return api.fire({
     url,
     headers: { 'Content-Type': 'application/json' },
@@ -11,8 +11,8 @@ svgAPI.getAllSVG = () => {
   });
 };
 
-svgAPI.createSVG = () => {
-  const url = `/svg`;
+templateAPI.createTemplate = () => {
+  const url = `/template`;
   return api.fire({
     url,
     headers: { 'Content-Type': 'application/json' },
@@ -20,8 +20,8 @@ svgAPI.createSVG = () => {
   });
 };
 
-svgAPI.getSVG = (name) => {
-  const url = `/svg/${name}`;
+templateAPI.getTemplate = (template_ID) => {
+  const url = `/template/${template_ID}`;
   return api.fire({
     url,
     headers: { 'Content-Type': 'application/json' },
@@ -29,8 +29,8 @@ svgAPI.getSVG = (name) => {
   });
 };
 
-svgAPI.editSVG = (name) => {
-  const url = `/svg/${name}`;
+templateAPI.editTemplate = (template_ID) => {
+  const url = `/template/${template_ID}`;
   return api.fire({
     url,
     headers: { 'Content-Type': 'application/json' },
@@ -38,8 +38,8 @@ svgAPI.editSVG = (name) => {
   });
 };
 
-svgAPI.deleteSVG = (name) => {
-  const url = `/svg/${name}`;
+templateAPI.deleteTemplate = (template_ID) => {
+  const url = `/template/${template_ID}`;
   return api.fire({
     url,
     headers: { 'Content-Type': 'application/json' },
@@ -47,4 +47,4 @@ svgAPI.deleteSVG = (name) => {
   });
 };
 
-export default svgAPI;
+export default templateAPI;
