@@ -6,17 +6,17 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-import Str from '../../../config/zh-tw.json';
+import LANG from '../../../languages/zh-tw.json';
 
 export default function AddBar({ setBody }) {
-  const [term, setTerm] = useState(Str.term + Str.name);
-  const [termType, setTermType] = useState(Str.choice + Str.type);
-  const [content, setContent] = useState(Str.default + Str.content);
+  const [term, setTerm] = useState(LANG.term + LANG.name);
+  const [termType, setTermType] = useState(LANG.choice + LANG.type);
+  const [content, setContent] = useState(LANG.default + LANG.content);
 
   return (
     <InputGroup className="mb-3">
       <InputGroup.Prepend>
-        <InputGroup.Text>{Str.term}</InputGroup.Text>
+        <InputGroup.Text>{LANG.term}</InputGroup.Text>
       </InputGroup.Prepend>
 
       <Form.Control
@@ -41,7 +41,7 @@ export default function AddBar({ setBody }) {
               { term: term, type: termType, content: content },
             ])
           }>
-          {Str.new}
+          {LANG.new}
         </Button>
       </InputGroup.Append>
     </InputGroup>
@@ -50,10 +50,10 @@ export default function AddBar({ setBody }) {
 
 function TypeDropdown({ termType, setTermType }) {
   let Items = [];
-  Object.keys(Str.types).forEach((key) => {
+  Object.keys(LANG.types).forEach((key) => {
     Items.push(
-      <Dropdown.Item key={key} eventKey={Str.types[key]}>
-        {Str.types[key]}
+      <Dropdown.Item key={key} eventKey={LANG.types[key]}>
+        {LANG.types[key]}
       </Dropdown.Item>,
     );
   });
