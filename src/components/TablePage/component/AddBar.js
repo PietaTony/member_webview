@@ -49,9 +49,9 @@ export default function AddBar({ setBody }) {
 }
 
 function TypeDropdown({ termType, setTermType }) {
-  let Items = [];
+  const items = [];
   Object.keys(LANG.types).forEach((key) => {
-    Items.push(
+    items.push(
       <Dropdown.Item key={key} eventKey={LANG.types[key]}>
         {LANG.types[key]}
       </Dropdown.Item>,
@@ -66,7 +66,7 @@ function TypeDropdown({ termType, setTermType }) {
       onSelect={(e) => {
         setTermType(e);
       }}>
-      {Items}
+      {items}
     </DropdownButton>
   );
 }

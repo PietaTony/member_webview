@@ -11,7 +11,7 @@ export default function ShowTable({ head, datas }) {
 }
 
 function TableHead({ head }) {
-  let THead = [];
+  const THead = [];
   Object.keys(head).forEach((key) => {
     THead.push(<th key={key}>{head[key]}</th>);
   });
@@ -23,7 +23,7 @@ function TableHead({ head }) {
 }
 
 function TableBody({ datas }) {
-  let TBody = [];
+  const TBody = [];
   Object.keys(datas).forEach((key) => {
     TBody.push(
       <tr key={key}>
@@ -34,33 +34,8 @@ function TableBody({ datas }) {
   return <tbody>{TBody}</tbody>;
 }
 
-// function TableData({ data }) {
-//   let TData = [];
-//   const [_data, setData] = useState(data);
-
-//   Object.keys(data).forEach((key) => {
-//     TData.push(<TableItem key={key} id={key} data={_data} setData={setData} />);
-//   });
-//   return TData;
-// }
-
-// function TableItem({ id, data, setData }) {
-//   return (
-//     <td
-//       onDoubleClick={() => {
-//         data[id] = "測試";
-//         console.log({ ...data });
-//         setData({ ...data });
-//       }}
-//     >
-//       {data[id]}
-//     </td>
-//   );
-// }
-
 function TableData({ data }) {
-  let TData = [];
-
+  const TData = [];
   Object.keys(data).forEach((key) => {
     TData.push(<TableItem key={key} item={data[key]} />);
   });
@@ -72,7 +47,7 @@ function TableItem({ item }) {
   return (
     <td
       onDoubleClick={() => {
-        setItem(...'測試');
+        setItem('測試');
       }}>
       {_item}
     </td>
