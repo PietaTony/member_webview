@@ -17,6 +17,17 @@ export default function DesignerPage() {
   const [height, setHeight] = useState(350);
   const ref = React.createRef();
 
+  const setNewData = async (newData) => {
+    await svgAPI
+      .createSVG(newData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div className="designer_page_container">
       <div>
@@ -51,8 +62,8 @@ export default function DesignerPage() {
           const newBody = {
             data: JSON.stringify(objects),
           };
-          console.log(objects);
           setDatas((oldBody) => [...oldBody, newBody]);
+          setNewData({ name: 'frontendTest', data: objects });
         }}>
         Save SVG to Database
       </Button>
@@ -76,22 +87,22 @@ function SVGTable({ datas, setDatas }) {
     data: LANG.data,
   };
 
-  // const setInitialDatas = async () => {
-  //   await svgAPI.getAllSVG().then((res) => {
-  //     const initialDatas = res.data.data;
-  //     const dataArray = [];
-  //     initialDatas.forEach((initialData) => {
-  //       dataArray.push({
-  //         data: initialData,
-  //       });
-  //     });
-  //     setDatas(dataArray);
-  //   });
-  // };
+  const setInitialDatas = async () => {
+    await svgAPI.getAllSVG().then((res) => {
+      const initialDatas = res.data.data;
+      const dataArray = [];
+      initialDatas.forEach((initialData) => {
+        dataArray.push({
+          data: initialData,
+        });
+      });
+      setDatas(dataArray);
+    });
+  };
 
-  // useEffect(() => {
-  //   setInitialDatas();
-  // }, []);
+  useEffect(() => {
+    setInitialDatas();
+  });
 
   return <ShowTable head={head} datas={datas} setDatas={setDatas} />;
 }
