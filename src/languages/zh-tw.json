@@ -1,5 +1,6 @@
 {
   "svg_ID": "svg ID",
+  "data": "資料",
   "term": "項目",
   "name": "名稱",
   "new": "新增",
@@ -10,7 +11,8 @@
   "types": {
     "text": "文字",
     "number": "數字",
-    "QRcode": "QRcode",
+    "Barcode": "一維碼(Barcode)",
+    "Qrcode": "二維碼(Qrcode)",
     "date": "日期"
   },
   "account": "信箱 ",

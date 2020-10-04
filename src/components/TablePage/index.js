@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import AddBar from './component/AddBar';
 import ShowTable from './component/Table';
@@ -8,17 +8,23 @@ import LANG from '../../languages/zh-tw.json';
 
 export default function TablePage() {
   const head = {
-    term: LANG.term,
+    name: LANG.name,
     type: LANG.type,
-    content: LANG.content,
+    data: LANG.data,
   };
 
-  // const initialDatas = templateAPI.getAllTemplate().then((result) => {
-  //   console.log(result.data.data);
-  //   return result.data.data;
-  // });
-
   const [datas, setDatas] = useState([]);
+
+  const setInitialDatas = async () => {
+    await templateAPI.getAllTemplate().then((res) => {
+      const initialData = res.data.data[0];
+      setDatas([{ name: initialData[2], type: initialData[3], data: initialData[4] }]);
+    });
+  };
+
+  useEffect(() => {
+    setInitialDatas();
+  }, []);
 
   return (
     <>

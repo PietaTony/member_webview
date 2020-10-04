@@ -19,6 +19,7 @@ templateAPI.createTemplate = (newTemplate) => {
     url,
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
     method: 'POST',
     newTemplate,

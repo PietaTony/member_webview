@@ -6,12 +6,21 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
+
+import templateAPI from '../../../APIs/templateAPI';
 import LANG from '../../../languages/zh-tw.json';
 
 export default function AddBar({ setBody }) {
   const [term, setTerm] = useState(LANG.term + LANG.name);
   const [termType, setTermType] = useState(LANG.choice + LANG.type);
-  const [content, setContent] = useState(LANG.default + LANG.content);
+  const [data, setData] = useState(LANG.default + LANG.data);
+
+  const setNewData = async (newData) => {
+    await templateAPI
+      .createTemplate(newData)
+      .then((res) => {})
+      .catch(() => {});
+  };
 
   return (
     <InputGroup className="mb-3">
@@ -27,20 +36,22 @@ export default function AddBar({ setBody }) {
       <TypeDropdown termType={termType} setTermType={setTermType} />
 
       <Form.Control
-        placeholder={content}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        placeholder={data}
+        onChange={(e) => setData(e.target.value)}
       />
 
       <InputGroup.Append>
         <Button
           variant="outline-secondary"
-          onClick={() =>
-            setBody((oldBody) => [
-              ...oldBody,
-              { term: term, type: termType, content: content },
-            ])
-          }>
+          onClick={() => {
+            const newData = {
+              term_name: term,
+              type: termType,
+              data: data,
+            };
+            setBody((oldBody) => [...oldBody, newData]);
+            setNewData({ ...newData, template_id: 'template_id_test' });
+          }}>
           {LANG.new}
         </Button>
       </InputGroup.Append>

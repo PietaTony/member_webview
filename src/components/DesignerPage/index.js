@@ -43,6 +43,7 @@ export default function DesignerPage() {
       <ReactToPdf targetRef={ref} filename="code-example.pdf">
         {({ toPdf }) => <Button onClick={toPdf}>Generate Pdf</Button>}
       </ReactToPdf>
+      <a href="/table">Table Page</a>
     </div>
   );
 }
