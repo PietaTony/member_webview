@@ -19,10 +19,9 @@ templateAPI.createTemplate = (newTemplate) => {
     url,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
     },
     method: 'POST',
-    newTemplate,
+    data: newTemplate,
   });
 };
 
@@ -45,7 +44,7 @@ templateAPI.editTemplate = (template_ID, newTemplate) => {
       'Content-Type': 'application/json',
     },
     method: 'PUT',
-    newTemplate,
+    data: newTemplate,
   });
 };
 

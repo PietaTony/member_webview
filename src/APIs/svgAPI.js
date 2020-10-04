@@ -21,7 +21,7 @@ svgAPI.createSVG = (newSVG) => {
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    newSVG,
+    data: newSVG,
   });
 };
 
@@ -36,7 +36,7 @@ svgAPI.getSVG = (name) => {
   });
 };
 
-svgAPI.editSVG = (name, newSVG) => {
+svgAPI.editSVG = (name, renewedSVG) => {
   const url = `/svg/${name}`;
   return api.fire({
     url,
@@ -44,7 +44,7 @@ svgAPI.editSVG = (name, newSVG) => {
       'Content-Type': 'application/json',
     },
     method: 'PUT',
-    newSVG,
+    data: renewedSVG,
   });
 };
 

@@ -9,11 +9,11 @@
   "type": "類型",
   "default": "預設",
   "types": {
-    "text": "文字",
-    "number": "數字",
-    "Barcode": "一維碼(Barcode)",
-    "Qrcode": "二維碼(Qrcode)",
-    "date": "日期"
+    "text": "text",
+    "number": "number",
+    "Barcode": "Barcode",
+    "Qrcode": "Qrcode",
+    "date": "date"
   },
   "account": "信箱 ",
   "check": "確認",

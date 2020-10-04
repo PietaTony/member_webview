@@ -7,8 +7,8 @@ import {
   Form,
 } from 'react-bootstrap';
 
-import templateAPI from '../../../APIs/templateAPI';
-import LANG from '../../../languages/zh-tw.json';
+import templateAPI from '../../APIs/templateAPI';
+import LANG from '../../languages/zh-tw.json';
 
 export default function AddBar({ setBody }) {
   const [term, setTerm] = useState(LANG.term + LANG.name);
@@ -18,8 +18,12 @@ export default function AddBar({ setBody }) {
   const setNewData = async (newData) => {
     await templateAPI
       .createTemplate(newData)
-      .then((res) => {})
-      .catch(() => {});
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -50,7 +54,7 @@ export default function AddBar({ setBody }) {
               data: data,
             };
             setBody((oldBody) => [...oldBody, newData]);
-            setNewData({ ...newData, template_id: 'template_id_test' });
+            setNewData({ template_id: 'template_id_test', ...newData });
           }}>
           {LANG.new}
         </Button>
