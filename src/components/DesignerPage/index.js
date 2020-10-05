@@ -28,6 +28,19 @@ export default function DesignerPage() {
       });
   };
 
+  // const updateSVG = async () => {
+  //   await Object.keys(templateIDs).forEach((key) => {
+  //     const newData = { ...templateIDs[key], ...datas[key] };
+  //     const template_id = templateIDs[key]['template_id'];
+  //     svgAPI
+  //       .editSVG(template_id, newData)
+  //       .then((res) => {})
+  //       .catch((err) => {
+  //         console.error(err);
+  //       });
+  //   });
+  // };
+
   return (
     <div className="designer_page_container">
       <div>

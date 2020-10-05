@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 
 import AddBar from './AddBar';
 import ShowTable from '../ShowTable';
@@ -8,7 +9,8 @@ import LANG from '../../languages/zh-tw.json';
 
 export default function TablePage() {
   const head = {
-    name: LANG.name,
+    template_id: LANG.ID,
+    term_name: LANG.name,
     type: LANG.type,
     data: LANG.data,
   };
@@ -21,7 +23,8 @@ export default function TablePage() {
       const dataArray = [];
       initialDatas.forEach((initialData) => {
         dataArray.push({
-          name: initialData[2],
+          template_id: initialData[1],
+          term_name: initialData[2],
           type: initialData[3],
           data: initialData[4],
         });
@@ -34,11 +37,44 @@ export default function TablePage() {
     setInitialDatas();
   }, []);
 
+  const updateTemplate = async () => {
+    await Object.keys(datas).forEach((key) => {
+      templateAPI
+        .editTemplate(datas[key]['template_id'], datas[key])
+        .then((res) => {})
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+  };
+
+  const deleteData = async (template_id) => {
+    await templateAPI
+      .deleteTemplate(template_id)
+      .then((res) => {})
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <>
-      <div><a href="/">Back to SVG Editor</a></div>
+      <div>
+        <a href="/">Back to SVG Editor</a>
+      </div>
       <AddBar setBody={setDatas} />
-      <ShowTable head={head} datas={datas}/>
+      <ShowTable
+        head={head}
+        datas={datas}
+        setDatas={setDatas}
+        deleteData={deleteData}
+      />
+      <Button
+        onClick={() => {
+          updateTemplate();
+        }}>
+        Save changes
+      </Button>
     </>
   );
 }
