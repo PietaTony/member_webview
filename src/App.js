@@ -1,18 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import DesignerPage from './components/DesignerPage';
-import TablePage from './components/TablePage';
 
-const ROUTES = [
-  {
-    path: '/',
-    component: DesignerPage,
-  },
-  {
-    path: '/table',
-    component: TablePage,
-  },
-];
+import ROUTES from './routes';
 
 export default function App() {
   return (
@@ -20,10 +9,12 @@ export default function App() {
       <Switch>
         {ROUTES.map((route, i) => (
           <Route
-            exact
             key={i}
             path={route.path}
-            render={() => <route.component />}
+            exact={route.exact}
+            render={(routeProps) => (
+              <route.component routes={route.routes} {...routeProps} />
+            )}
           />
         ))}
       </Switch>

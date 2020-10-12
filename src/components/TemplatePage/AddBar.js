@@ -10,7 +10,7 @@ import {
 import templateAPI from '../../APIs/templateAPI';
 import LANG from '../../languages/zh-tw.json';
 
-export default function AddBar({ setBody }) {
+export default function AddBar({ svg_id, setBody }) {
   const [term, setTerm] = useState(LANG.term + LANG.name);
   const [termType, setTermType] = useState(LANG.choice + LANG.type);
   const [data, setData] = useState(LANG.default + LANG.data);
@@ -18,9 +18,7 @@ export default function AddBar({ setBody }) {
   const setNewData = async (newData) => {
     await templateAPI
       .createTemplate(newData)
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then((res) => {})
       .catch((err) => {
         console.error(err);
       });
@@ -54,7 +52,7 @@ export default function AddBar({ setBody }) {
               data: data,
             };
             setBody((oldBody) => [...oldBody, newData]);
-            setNewData({ template_id: 'template_id_test', ...newData });
+            setNewData({ template_id: svg_id, ...newData });
           }}>
           {LANG.new}
         </Button>

@@ -189,7 +189,6 @@ export default class Designer extends Component {
 
           return updatePath ? this.updatePath(newObject) : newObject;
         } else {
-          // console.log("ID=> ", object.uuid, "CHANGES :", JSON.stringify(changes))
           return object;
         }
       }),
@@ -388,7 +387,6 @@ export default class Designer extends Component {
 
   handleObjectChange(key, value) {
     const { selectedObjectIndex } = this.state;
-    // console.log(this.state, key, value)
     this.updateObject(selectedObjectIndex, {
       [key]: value,
     });

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import ReactToPdf from 'react-to-pdf';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { Designer } from '../ReactDesigner';
-import ShowTable from '../ShowTable';
 import svgAPI from '../../APIs/svgAPI';
 
 import LANG from '../../languages/zh-tw.json';
@@ -11,41 +9,36 @@ import LANG from '../../languages/zh-tw.json';
 import './style.css';
 
 export default function DesignerPage() {
-  const [datas, setDatas] = useState([]);
-  const [objects, setObjects] = useState([]);
+  const [svg, setSvg] = useState({ name: '', data: [] });
   const [width, setWidth] = useState(400);
   const [height, setHeight] = useState(350);
-  const ref = React.createRef();
 
-  const setNewData = async (newData) => {
-    await svgAPI
-      .createSVG(newData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const setSvgName = (newName) => {
+    const tmp = { ...svg };
+    tmp.name = newName;
+    setSvg(tmp);
   };
-
-  // const updateSVG = async () => {
-  //   await Object.keys(templateIDs).forEach((key) => {
-  //     const newData = { ...templateIDs[key], ...datas[key] };
-  //     const template_id = templateIDs[key]['template_id'];
-  //     svgAPI
-  //       .editSVG(template_id, newData)
-  //       .then((res) => {})
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   });
-  // };
+  const setSvgObjects = (newObjects) => {
+    const tmp = { ...svg };
+    tmp.data = newObjects;
+    setSvg(tmp);
+  };
 
   return (
     <div className="designer_page_container">
       <div>
         <label>
-          Width:
+          {LANG.name}:{' '}
+          <input
+            type="text"
+            name="svg_name"
+            value={svg.name}
+            onChange={(e) => setSvgName(e.target.value)}></input>
+        </label>
+      </div>
+      <div>
+        <label>
+          {LANG.width}:{' '}
           <input
             name="width"
             type="number"
@@ -53,7 +46,7 @@ export default function DesignerPage() {
             onChange={(e) => setWidth(e.target.value)}></input>
         </label>
         <label>
-          Height:
+          {LANG.height}:{' '}
           <input
             name="height"
             type="number"
@@ -61,61 +54,36 @@ export default function DesignerPage() {
             onChange={(e) => setHeight(e.target.value)}></input>
         </label>
       </div>
-      <div ref={ref} className="designer">
+      <div className="designer">
         <Designer
           width={width}
           height={height}
-          objects={objects}
-          onUpdate={(newObjects) => setObjects(newObjects)}
+          objects={svg.data}
+          onUpdate={(newObjects) => setSvgObjects(newObjects)}
         />
       </div>
       <br />
       <Button
         onClick={() => {
-          const newBody = {
-            data: JSON.stringify(objects),
-          };
-          setDatas((oldBody) => [...oldBody, newBody]);
-          setNewData({ name: 'frontendTest', data: objects });
+          if (svg.name) {
+            saveNewSvg(svg);
+            window.location.replace('/');
+          } else {
+            alert(LANG.please_enter_name);
+          }
         }}>
-        Save SVG to Database
+        {LANG.save_svg}
       </Button>
-      <ReactToPdf targetRef={ref} filename="code-example.pdf">
-        {({ toPdf }) => (
-          <Button variant="outline-secondary" onClick={toPdf}>
-            Generate Pdf
-          </Button>
-        )}
-      </ReactToPdf>
-      <a href="/table">
-        <b>Redirect to Table Page</b>
-      </a>
-      <SVGTable datas={datas} setDatas={setDatas} />
+      <a href="/">{LANG.back}</a>
     </div>
   );
 }
 
-function SVGTable({ datas, setDatas }) {
-  const head = {
-    data: LANG.data,
-  };
-
-  const setInitialDatas = async () => {
-    await svgAPI.getAllSVG().then((res) => {
-      const initialDatas = res.data.data;
-      const dataArray = [];
-      initialDatas.forEach((initialData) => {
-        dataArray.push({
-          data: initialData,
-        });
-      });
-      setDatas(dataArray);
+const saveNewSvg = async (newSVG) => {
+  await svgAPI
+    .createSVG(newSVG)
+    .then((res) => {})
+    .catch((err) => {
+      console.error(err);
     });
-  };
-
-  useEffect(() => {
-    setInitialDatas();
-  });
-
-  return <ShowTable head={head} datas={datas} setDatas={setDatas} />;
-}
+};
