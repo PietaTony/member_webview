@@ -25,8 +25,8 @@ templateAPI.createTemplate = (newTemplate) => {
   });
 };
 
-templateAPI.getTemplate = (template_ID) => {
-  const url = `/template/${template_ID}`;
+templateAPI.getTemplate = (id) => {
+  const url = `/template/${id}`;
   return api.fire({
     url,
     headers: {
@@ -36,8 +36,8 @@ templateAPI.getTemplate = (template_ID) => {
   });
 };
 
-templateAPI.editTemplate = (template_ID, newTemplate) => {
-  const url = `/template/${template_ID}`;
+templateAPI.editTemplate = (id, newTemplate) => {
+  const url = `/template/${id}`;
   return api.fire({
     url,
     headers: {
@@ -48,8 +48,8 @@ templateAPI.editTemplate = (template_ID, newTemplate) => {
   });
 };
 
-templateAPI.deleteTemplate = (template_ID) => {
-  const url = `/template/${template_ID}`;
+templateAPI.deleteTemplate = (id) => {
+  const url = `/template/${id}`;
   return api.fire({
     url,
     headers: {

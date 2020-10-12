@@ -25,8 +25,8 @@ svgAPI.createSVG = (newSVG) => {
   });
 };
 
-svgAPI.getSVG = (name) => {
-  const url = `/svg/${name}`;
+svgAPI.getSVG = (id) => {
+  const url = `/svg/${id}`;
   return api.fire({
     url,
     headers: {
@@ -36,20 +36,20 @@ svgAPI.getSVG = (name) => {
   });
 };
 
-svgAPI.editSVG = (name, renewedSVG) => {
-  const url = `/svg/${name}`;
+svgAPI.editSVG = (id, newSVG) => {
+  const url = `/svg/${id}`;
   return api.fire({
     url,
     headers: {
       'Content-Type': 'application/json',
     },
     method: 'PUT',
-    data: renewedSVG,
+    data: newSVG,
   });
 };
 
-svgAPI.deleteSVG = (name) => {
-  const url = `/svg/${name}`;
+svgAPI.deleteSVG = (id) => {
+  const url = `/svg/${id}`;
   return api.fire({
     url,
     headers: {
