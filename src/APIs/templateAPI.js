@@ -59,4 +59,15 @@ templateAPI.deleteTemplate = (id) => {
   });
 };
 
+templateAPI.getRelatedTemplate = (template_ID) => {
+  const url = `/template/all/${template_ID}`;
+  return api.fire({
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'GET',
+  });
+}
+
 export default templateAPI;

@@ -79,8 +79,8 @@ export default function DesignerPage() {
   );
 }
 
-const saveNewSvg = async (newSVG) => {
-  await svgAPI
+const saveNewSvg = (newSVG) => {
+  svgAPI
     .createSVG(newSVG)
     .then((res) => {})
     .catch((err) => {

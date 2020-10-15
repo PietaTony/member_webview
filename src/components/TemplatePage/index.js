@@ -13,7 +13,7 @@ import './style.css';
 
 export default function TemplatePage() {
   const [datas, setDatas] = useState([]);
-  const [svg, setSvg] = useState({});
+  const [svg, setSvg] = useState({ name: '', data: [] });
   const [width, setWidth] = useState(400);
   const [height, setHeight] = useState(350);
 
@@ -36,27 +36,24 @@ export default function TemplatePage() {
   };
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const svg_id = urlParams.get('id');
+
     // set initial svg data
-    (async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const svg_id = urlParams.get('id');
-      await svgAPI.getSVG(svg_id).then((res) => {
-        const tmp = res.data.data;
-        const initialSvgDatas = {
-          id: tmp.id,
-          name: tmp.name,
-          data: JSON.parse(tmp.svg),
-        };
-        setSvg(initialSvgDatas);
-      });
-    })();
+    svgAPI.getSVG(svg_id).then((res) => {
+      const tmp = res.data.data;
+      const initialSvgDatas = {
+        id: tmp.id,
+        name: tmp.name,
+        data: JSON.parse(tmp.svg),
+      };
+      setSvg(initialSvgDatas);
+    });
 
     // setInitialDatas
-    (async () => {
-      await templateAPI.getAllTemplate().then((res) => {
-        setDatas(res.data.data);
-      });
-    })();
+    templateAPI.getRelatedTemplate(svg_id).then((res) => {
+      setDatas(res.data.data);
+    });
   }, []);
 
   return (
@@ -71,7 +68,7 @@ export default function TemplatePage() {
             <input
               type="text"
               name="svg_name"
-              value={svg.name || ''}
+              value={svg.name}
               onChange={(e) => setSvgName(e.target.value)}></input>
           </label>
         </div>
@@ -97,7 +94,7 @@ export default function TemplatePage() {
           <Designer
             width={width}
             height={height}
-            objects={svg.data || []}
+            objects={svg.data}
             onUpdate={(newObjects) => setSvgObjects(newObjects)}
           />
         </div>
@@ -131,8 +128,8 @@ export default function TemplatePage() {
   );
 }
 
-const saveSvg = async (id, newSVG) => {
-  await svgAPI
+const saveSvg = (id, newSVG) => {
+  svgAPI
     .editSVG(id, newSVG)
     .then((res) => {})
     .catch((err) => {
@@ -140,8 +137,8 @@ const saveSvg = async (id, newSVG) => {
     });
 };
 
-const updateTemplate = async (datas) => {
-  await Object.keys(datas).forEach((key) => {
+const updateTemplate = (datas) => {
+  Object.keys(datas).forEach((key) => {
     templateAPI
       .editTemplate(datas[key].id, datas[key])
       .then((res) => {})
@@ -151,8 +148,8 @@ const updateTemplate = async (datas) => {
   });
 };
 
-const deleteData = async (id) => {
-  await templateAPI
+const deleteData = (id) => {
+  templateAPI
     .deleteTemplate(id)
     .then((res) => {})
     .catch((err) => {

@@ -14,20 +14,18 @@ export default function TemplatePage() {
 
   useEffect(() => {
     // setInitialDatas
-    (async () => {
-      await svgAPI.getAllSVG().then((res) => {
-        const initialDatas = res.data.data;
-        const dataArray = [];
-        initialDatas.forEach((initialData) => {
-          dataArray.push({
-            id: initialData.id,
-            name: initialData.name,
-            data: JSON.parse(initialData.svg),
-          });
+    svgAPI.getAllSVG().then((res) => {
+      const initialDatas = res.data.data;
+      const dataArray = [];
+      initialDatas.forEach((initialData) => {
+        dataArray.push({
+          id: initialData.id,
+          name: initialData.name,
+          data: JSON.parse(initialData.svg),
         });
-        setDatas(dataArray);
       });
-    })();
+      setDatas(dataArray);
+    });
   }, []);
 
   return (
@@ -44,8 +42,8 @@ export default function TemplatePage() {
   );
 }
 
-const deleteData = async (id) => {
-  await svgAPI
+const deleteData = (id) => {
+  svgAPI
     .deleteSVG(id)
     .then((res) => {})
     .catch((err) => {

@@ -15,8 +15,8 @@ export default function AddBar({ svg_id, setBody }) {
   const [termType, setTermType] = useState(LANG.choice + LANG.type);
   const [data, setData] = useState(LANG.default + LANG.data);
 
-  const setNewData = async (newData) => {
-    await templateAPI
+  const setNewData = (newData) => {
+    templateAPI
       .createTemplate(newData)
       .then((res) => {})
       .catch((err) => {
