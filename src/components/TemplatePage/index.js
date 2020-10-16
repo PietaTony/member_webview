@@ -39,21 +39,23 @@ export default function TemplatePage() {
     const urlParams = new URLSearchParams(window.location.search);
     const svg_id = urlParams.get('id');
 
-    // set initial svg data
-    svgAPI.getSVG(svg_id).then((res) => {
-      const tmp = res.data.data;
-      const initialSvgDatas = {
-        id: tmp.id,
-        name: tmp.name,
-        data: JSON.parse(tmp.svg),
-      };
-      setSvg(initialSvgDatas);
-    });
+    if (svg_id) {
+      // set initial svg data
+      svgAPI.getSVG(svg_id).then((res) => {
+        const tmp = res.data.data;
+        const initialSvgDatas = {
+          id: tmp.id,
+          name: tmp.name,
+          data: JSON.parse(tmp.svg),
+        };
+        setSvg(initialSvgDatas);
+      });
 
-    // setInitialDatas
-    templateAPI.getRelatedTemplate(svg_id).then((res) => {
-      setDatas(res.data.data);
-    });
+      // setInitialDatas
+      templateAPI.getRelatedTemplate(svg_id).then((res) => {
+        setDatas(res.data.data);
+      });
+    }
   }, []);
 
   return (
@@ -102,7 +104,12 @@ export default function TemplatePage() {
         <Button
           onClick={() => {
             if (svg.name) {
-              saveSvg(svg.id, svg);
+              if (svg.id) {
+                saveSvg(svg.id, svg);
+              } else {
+                saveNewSvg(svg);
+                window.location.replace('/');
+              }
             } else {
               alert(LANG.please_enter_name);
             }
@@ -110,23 +117,36 @@ export default function TemplatePage() {
           {LANG.save_svg}
         </Button>
       </div>
-      <AddBar svg_id={svg.id} setBody={setDatas} />
-      <ShowTable
-        head={head}
-        columns={columns}
-        datas={datas}
-        setDatas={setDatas}
-        deleteData={deleteData}
-      />
-      <Button
-        onClick={() => {
-          updateTemplate(datas);
-        }}>
-        {LANG.save_changes}
-      </Button>
+      {svg.id && (
+        <>
+          <AddBar svg_id={svg.id} setBody={setDatas} />
+          <ShowTable
+            head={head}
+            columns={columns}
+            datas={datas}
+            setDatas={setDatas}
+            deleteData={deleteData}
+          />
+          <Button
+            onClick={() => {
+              updateTemplate(datas);
+            }}>
+            {LANG.save_changes}
+          </Button>
+        </>
+      )}
     </>
   );
 }
+
+const saveNewSvg = (newSVG) => {
+  svgAPI
+    .createSVG(newSVG)
+    .then((res) => {})
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 const saveSvg = (id, newSVG) => {
   svgAPI

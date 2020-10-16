@@ -37,7 +37,7 @@ export default function TemplatePage() {
         setDatas={setDatas}
         deleteData={deleteData}
       />
-      <a href="/designer">{LANG.create_svg}</a>
+      <a href="/template">{LANG.create_svg}</a>
     </>
   );
 }

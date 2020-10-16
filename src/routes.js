@@ -1,6 +1,5 @@
 import MainPage from './components/MainPage';
 import TemplatePage from './components/TemplatePage';
-import DesignerPage from './components/DesignerPage';
 
 const ROUTES = [
   {
@@ -11,10 +10,6 @@ const ROUTES = [
   {
     path: '/template',
     component: TemplatePage,
-  },
-  {
-    path: '/designer',
-    component: DesignerPage,
   },
 ];
 
