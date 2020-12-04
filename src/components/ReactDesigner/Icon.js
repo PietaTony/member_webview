@@ -170,10 +170,7 @@ export default class Icon extends Component {
         );
       case 'qrcode':
         return (
-          <svg
-            id="Outline"
-            viewBox="0 0 512 512"
-            xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 512 512">
             <path d="m488 16h-48a8 8 0 0 0 0 16h40v40a8 8 0 0 0 16 0v-48a8 8 0 0 0 -8-8z" />
             <path d="m24 80a8 8 0 0 0 8-8v-40h40a8 8 0 0 0 0-16h-48a8 8 0 0 0 -8 8v48a8 8 0 0 0 8 8z" />
             <path d="m488 432a8 8 0 0 0 -8 8v40h-40a8 8 0 0 0 0 16h48a8 8 0 0 0 8-8v-48a8 8 0 0 0 -8-8z" />
@@ -215,153 +212,32 @@ export default class Icon extends Component {
         );
       case 'barcode':
         return (
-          <svg
-            version="1.1"
-            id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            viewBox="0 0 512 512">
-            <g>
-              <g>
-                <rect x="42.667" y="102.4" width="17.067" height="281.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="85.333" y="102.4" width="25.6" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="136.533" y="102.4" width="17.067" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="170.667" y="102.4" width="25.6" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="213.333" y="102.4" width="17.067" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M8.533,51.2C3.413,51.2,0,54.613,0,59.733V102.4h17.067V68.267H51.2V51.2H8.533z" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="247.467" y="102.4" width="17.067" height="281.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="324.267" y="102.4" width="25.6" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="375.467" y="102.4" width="17.067" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="409.6" y="102.4" width="25.6" height="238.933" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="452.267" y="102.4" width="17.067" height="281.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M17.067,443.733V409.6H0v42.667c0,5.12,3.413,8.533,8.533,8.533H51.2v-17.067H17.067z" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M494.933,409.6v34.133H460.8V460.8h42.667c5.12,0,8.533-3.413,8.533-8.533V409.6H494.933z" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M503.467,51.2H460.8v17.067h34.133V102.4H512V59.733C512,54.613,508.587,51.2,503.467,51.2z" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="76.8" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="110.933" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="145.067" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="179.2" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="213.333" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="281.6" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="315.733" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="349.867" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="384" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="418.133" y="358.4" width="17.067" height="25.6" />
-              </g>
-            </g>
-            <g>
-              <g>
-                <rect x="290.133" y="102.4" width="17.067" height="238.933" />
-              </g>
-            </g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
+          <svg viewBox="0 0 512 512">
+            <rect x="42.667" y="102.4" width="17.067" height="281.6" />
+            <rect x="85.333" y="102.4" width="25.6" height="238.933" />
+            <rect x="136.533" y="102.4" width="17.067" height="238.933" />
+            <rect x="170.667" y="102.4" width="25.6" height="238.933" />
+            <rect x="213.333" y="102.4" width="17.067" height="238.933" />
+            <path d="M8.533,51.2C3.413,51.2,0,54.613,0,59.733V102.4h17.067V68.267H51.2V51.2H8.533z" />
+            <rect x="247.467" y="102.4" width="17.067" height="281.6" />
+            <rect x="324.267" y="102.4" width="25.6" height="238.933" />
+            <rect x="375.467" y="102.4" width="17.067" height="238.933" />
+            <rect x="409.6" y="102.4" width="25.6" height="238.933" />
+            <rect x="452.267" y="102.4" width="17.067" height="281.6" />
+            <path d="M17.067,443.733V409.6H0v42.667c0,5.12,3.413,8.533,8.533,8.533H51.2v-17.067H17.067z" />
+            <path d="M494.933,409.6v34.133H460.8V460.8h42.667c5.12,0,8.533-3.413,8.533-8.533V409.6H494.933z" />
+            <path d="M503.467,51.2H460.8v17.067h34.133V102.4H512V59.733C512,54.613,508.587,51.2,503.467,51.2z" />
+            <rect x="76.8" y="358.4" width="17.067" height="25.6" />
+            <rect x="110.933" y="358.4" width="17.067" height="25.6" />
+            <rect x="145.067" y="358.4" width="17.067" height="25.6" />
+            <rect x="179.2" y="358.4" width="17.067" height="25.6" />
+            <rect x="213.333" y="358.4" width="17.067" height="25.6" />
+            <rect x="281.6" y="358.4" width="17.067" height="25.6" />
+            <rect x="315.733" y="358.4" width="17.067" height="25.6" />
+            <rect x="349.867" y="358.4" width="17.067" height="25.6" />
+            <rect x="384" y="358.4" width="17.067" height="25.6" />
+            <rect x="418.133" y="358.4" width="17.067" height="25.6" />
+            <rect x="290.133" y="102.4" width="17.067" height="238.933" />
           </svg>
         );
       default:
@@ -369,7 +245,7 @@ export default class Icon extends Component {
     }
   }
   render() {
-    let styles = {
+    const styles = {
       fill: this.props.active ? 'black' : '#b5b5b5',
       verticalAlign: 'middle',
       width: this.props.size,
