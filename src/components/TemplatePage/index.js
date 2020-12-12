@@ -14,8 +14,10 @@ import './style.css';
 export default function TemplatePage() {
   const [datas, setDatas] = useState([]);
   const [svg, setSvg] = useState({ name: '', data: [] });
-  const [width, setWidth] = useState(400);
-  const [height, setHeight] = useState(350);
+  // const [width, setWidth] = useState(400);
+  // const [height, setHeight] = useState(350);
+  const [width, setWidth] = useState(106);
+  const [height, setHeight] = useState(93);
 
   const head = {
     term_name: LANG.name,
@@ -33,6 +35,10 @@ export default function TemplatePage() {
     const tmp = { ...svg };
     tmp.data = newObjects;
     setSvg(tmp);
+  };
+
+  const MmToPixel = (value) => {
+    return Math.round(value / 0.264583333);
   };
 
   useEffect(() => {
@@ -83,6 +89,7 @@ export default function TemplatePage() {
                 name="width"
                 value={width}
                 onChange={(e) => setWidth(e.target.value)}></input>
+              <span>&nbsp;(mm)</span>
             </label>
             <label>
               {LANG.height}:{' '}
@@ -91,11 +98,12 @@ export default function TemplatePage() {
                 name="height"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}></input>
+              <span>&nbsp;(mm)</span>
             </label>
           </div>
           <Designer
-            width={width}
-            height={height}
+            width={MmToPixel(width)}
+            height={MmToPixel(height)}
             objects={svg.data}
             onUpdate={(newObjects) => setSvgObjects(newObjects)}
           />

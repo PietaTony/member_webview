@@ -5,6 +5,7 @@ const api = {};
 const API_TIMEOUT_DUR = 30000;
 const instance = axios.create({
   timeout: API_TIMEOUT_DUR,
+  header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
 });
 
 api.fire = async (options, API_HOST = 'http://localhost:5000') => {
