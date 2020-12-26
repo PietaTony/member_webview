@@ -42,10 +42,8 @@ export default function TemplatePage() {
     tmp.data = [
       ...tmp.data,
       {
-        width_mm: MmToPixel(width),
-        height_mm: MmToPixel(height),
-        width_pixel: width,
-        height_pixel: height,
+        width: width,
+        height: height,
       },
     ];
     return tmp;
@@ -69,8 +67,8 @@ export default function TemplatePage() {
           data: JSON.parse(tmp.svg),
         };
         let size = initialSvgDatas.data.splice(-1)[0];
-        setWidth(size.width_pixel);
-        setHeight(size.height_pixel);
+        setWidth(size.width);
+        setHeight(size.height);
         setSvg(initialSvgDatas);
       });
 
@@ -105,7 +103,7 @@ export default function TemplatePage() {
                 type="number"
                 name="width"
                 value={width}
-                onChange={(e) => setWidth(e.target.value)}></input>
+                onChange={(e) => setWidth(parseInt(e.target.value))}></input>
               <span>&nbsp;(mm)</span>
             </label>
             <label>
@@ -114,7 +112,7 @@ export default function TemplatePage() {
                 type="number"
                 name="height"
                 value={height}
-                onChange={(e) => setHeight(e.target.value)}></input>
+                onChange={(e) => setHeight(parseInt(e.target.value))}></input>
               <span>&nbsp;(mm)</span>
             </label>
           </div>
