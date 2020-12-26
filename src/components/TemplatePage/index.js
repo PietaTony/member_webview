@@ -13,11 +13,11 @@ import './style.css';
 
 export default function TemplatePage() {
   const [datas, setDatas] = useState([]);
-  const [svg, setSvg] = useState({ name: '', data: [] });
   // const [width, setWidth] = useState(400);
   // const [height, setHeight] = useState(350);
   const [width, setWidth] = useState(106);
   const [height, setHeight] = useState(93);
+  const [svg, setSvg] = useState({ name: '', data: [] });
 
   const head = {
     term_name: LANG.name,
@@ -37,6 +37,20 @@ export default function TemplatePage() {
     setSvg(tmp);
   };
 
+  const setSvgSize = () => {
+    let tmp = { ...svg };
+    tmp.data = [
+      ...tmp.data,
+      {
+        width_mm: MmToPixel(width),
+        height_mm: MmToPixel(height),
+        width_pixel: width,
+        height_pixel: height,
+      },
+    ];
+    return tmp;
+  };
+
   const MmToPixel = (value) => {
     return Math.round(value / 0.264583333);
   };
@@ -54,6 +68,9 @@ export default function TemplatePage() {
           name: tmp.name,
           data: JSON.parse(tmp.svg),
         };
+        let size = initialSvgDatas.data.splice(-1)[0];
+        setWidth(size.width_pixel);
+        setHeight(size.height_pixel);
         setSvg(initialSvgDatas);
       });
 
@@ -111,12 +128,13 @@ export default function TemplatePage() {
         <br />
         <Button
           onClick={() => {
-            if (svg.name) {
-              if (svg.id) {
-                saveSvg(svg.id, svg);
+            let tmp = setSvgSize();
+            if (tmp.name) {
+              if (tmp.id) {
+                saveSvg(tmp.id, tmp);
               } else {
-                saveNewSvg(svg);
-                window.location.replace('/');
+                saveNewSvg(tmp);
+                // window.location.replace('/');
               }
             } else {
               alert(LANG.please_enter_name);

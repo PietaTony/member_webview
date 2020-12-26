@@ -8,7 +8,7 @@ const instance = axios.create({
   header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
 });
 
-api.fire = async (options, API_HOST = 'http://localhost:5000') => {
+api.fire = async (options, API_HOST = 'http://10.0.0.12:5000') => {
   return instance
     .request({
       ...options,
