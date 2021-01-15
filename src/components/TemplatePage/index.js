@@ -157,6 +157,13 @@ export default function TemplatePage() {
             }}>
             {LANG.save_changes}
           </Button>
+          {/* <Button
+            onClick={() => {
+              printSVG(svg.id);
+            }}
+            style={styles.btn}>
+            {LANG.print_svg}
+          </Button> */}
         </>
       )}
     </>
@@ -199,4 +206,26 @@ const deleteData = (id) => {
     .catch((err) => {
       console.error(err);
     });
+};
+
+const printSVG = (id) => {
+  svgAPI
+    .printSVG(id)
+    .then((res) => {
+      console.log(res)
+      // let blob = new Blob([res.data.data], { type: 'image/svg+xml' });
+      // let link = document.createElement('a');
+      // link.href = window.URL.createObjectURL(blob);
+      // link.download = `dome.svg`;
+      // link.click();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const styles = {
+  btn: {
+    margin: '0 10px',
+  },
 };

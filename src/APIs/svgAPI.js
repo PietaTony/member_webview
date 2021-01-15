@@ -59,4 +59,16 @@ svgAPI.deleteSVG = (id) => {
   });
 };
 
+svgAPI.printSVG = (id) => {
+  const url = `/svg/print/${id}`;
+  return api.fire({
+    url,
+    headers: {
+      'Content-Type': 'application/json, image/svg+xml',
+    },
+    method: 'GET',
+    // responseType: 'arraybuffer',
+  });
+};
+
 export default svgAPI;

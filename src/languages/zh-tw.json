@@ -32,5 +32,6 @@
   "width": "寬度",
   "height": "高度",
   "create_svg": "製作新模板",
-  "please_enter_name": "請輸入名稱"
+  "please_enter_name": "請輸入名稱",
+  "print_svg": "列印 SVG"
 }
