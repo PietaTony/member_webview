@@ -24,7 +24,7 @@ export default function TemplatePage() {
     type: LANG.type,
     data: LANG.data,
   };
-  const columns = ['term_name', 'type', 'data'];
+  const columns = ['term_name', 'type', 'template_data'];
 
   const setSvgName = (newName) => {
     const tmp = { ...svg };

@@ -49,7 +49,7 @@ export default function AddBar({ svg_id, setBody }) {
             const newData = {
               term_name: term,
               type: termType,
-              data: data,
+              template_data: data,
             };
             setBody((oldBody) => [...oldBody, newData]);
             setNewData({ template_id: svg_id, ...newData });
