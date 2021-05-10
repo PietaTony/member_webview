@@ -24,7 +24,7 @@ export default function ShowTable({
       : datas;
 
   return (
-    <Table striped bordered hover size="sm">
+    <Table striped bordered hover size="sm" className='my-3'>
       <TableHead head={head} />
       <TableBody
         datas={datas}

@@ -1,5 +1,5 @@
 export { default as Preview } from './Preview';
-export { Vector, Path, Rect, Circle, Text, Image } from './objects';
+export { Vector, Path, Rect, Circle, Text, Image, Uuid } from './objects';
 export {
   TextPanel,
   SizePanel,

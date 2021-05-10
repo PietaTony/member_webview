@@ -17,6 +17,7 @@ export default function TemplatePage() {
   // const [height, setHeight] = useState(350);
   const [width, setWidth] = useState(106);
   const [height, setHeight] = useState(93);
+  const [bgImgUrl, setBgImgUrl] = useState('');
   const [svg, setSvg] = useState({ name: '', data: [] });
 
   const head = {
@@ -31,22 +32,37 @@ export default function TemplatePage() {
     tmp.name = newName;
     setSvg(tmp);
   };
+
   const setSvgObjects = (newObjects) => {
     const tmp = { ...svg };
     tmp.data = newObjects;
     setSvg(tmp);
   };
 
-  const setSvgSize = () => {
+  const setSvgAttr = () => {
     let tmp = { ...svg };
     tmp.data = [
       ...tmp.data,
       {
         width: width,
         height: height,
+        backgroundImage: bgImgUrl,
       },
     ];
     return tmp;
+  };
+
+  const fileToDataUrl = (e) => {
+    let files = e.target.files;
+
+    for (let file of files) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target.result;
+        setBgImgUrl(result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const MmToPixel = (value) => {
@@ -66,9 +82,10 @@ export default function TemplatePage() {
           name: tmp.name,
           data: JSON.parse(tmp.svg),
         };
-        let size = initialSvgDatas.data.splice(-1)[0];
-        setWidth(size.width);
-        setHeight(size.height);
+        let attr = initialSvgDatas.data.splice(-1)[0];
+        setWidth(attr.width);
+        setHeight(attr.height);
+        setBgImgUrl(attr.backgroundImage);
         setSvg(initialSvgDatas);
       });
 
@@ -116,9 +133,20 @@ export default function TemplatePage() {
               <span>&nbsp;(mm)</span>
             </label>
           </div>
+          <div>
+            <label>
+              {'選擇底圖：'}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => fileToDataUrl(e)}
+              />
+            </label>
+          </div>
           <Designer
             width={MmToPixel(width)}
             height={MmToPixel(height)}
+            background={bgImgUrl}
             objects={svg.data}
             onUpdate={(newObjects) => setSvgObjects(newObjects)}
           />
@@ -126,7 +154,7 @@ export default function TemplatePage() {
         <br />
         <Button
           onClick={() => {
-            let tmp = setSvgSize();
+            let tmp = setSvgAttr();
             if (tmp.name) {
               if (tmp.id) {
                 saveSvg(tmp.id, tmp);
@@ -157,13 +185,6 @@ export default function TemplatePage() {
             }}>
             {LANG.save_changes}
           </Button>
-          {/* <Button
-            onClick={() => {
-              printSVG(svg.id);
-            }}
-            style={styles.btn}>
-            {LANG.print_svg}
-          </Button> */}
         </>
       )}
     </>
@@ -203,22 +224,6 @@ const deleteData = (id) => {
   templateAPI
     .deleteTemplate(id)
     .then((res) => {})
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-const printSVG = (id) => {
-  svgAPI
-    .printSVG(id)
-    .then((res) => {
-      console.log(res)
-      // let blob = new Blob([res.data.data], { type: 'image/svg+xml' });
-      // let link = document.createElement('a');
-      // link.href = window.URL.createObjectURL(blob);
-      // link.download = `dome.svg`;
-      // link.click();
-    })
     .catch((err) => {
       console.error(err);
     });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   InputGroup,
   DropdownButton,
@@ -35,7 +35,7 @@ export default function AddBar({ svg_id, setBody }) {
         onChange={(e) => setTerm(e.target.value)}
       />
 
-      <TypeDropdown termType={termType} setTermType={setTermType} />
+      <TypeDropdown termType={termType} setTermType={setTermType} setTerm={setTerm} setData={setData} />
 
       <Form.Control
         placeholder={data}
@@ -61,7 +61,13 @@ export default function AddBar({ svg_id, setBody }) {
   );
 }
 
-function TypeDropdown({ termType, setTermType }) {
+function TypeDropdown({ termType, setTermType, setTerm, setData }) {
+
+  if(termType === 'uuid') {
+    setTerm('uuid')
+    setData(0)
+  }
+
   const items = [];
   Object.keys(LANG.types).forEach((key) => {
     items.push(

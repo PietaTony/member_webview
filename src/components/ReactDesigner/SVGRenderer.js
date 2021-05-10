@@ -39,7 +39,10 @@ class SVGRenderer extends Component {
       ...styles.canvas,
       ...(background
         ? {
-            backgroundColor: background,
+            backgroundImage: `url(${background})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
           }
         : styles.grid),
     };

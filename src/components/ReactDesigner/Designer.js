@@ -8,7 +8,7 @@ import SVGRenderer from './SVGRenderer';
 import Handler from './Handler';
 import { MODES } from './constants';
 import * as actions from './actions';
-import { Text, Path, Rect, Circle, Image, Qrcode, Barcode } from './objects';
+import { Text, Path, Rect, Circle, Image, Qrcode, Barcode, Uuid } from './objects';
 
 export default class Designer extends Component {
   static defaultProps = {
@@ -20,6 +20,7 @@ export default class Designer extends Component {
       image: Image,
       qrcode: Qrcode,
       barcode: Barcode,
+      uuid: Uuid
     },
     snapToGrid: 1,
   };
