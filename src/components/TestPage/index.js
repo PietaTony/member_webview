@@ -8,6 +8,7 @@ import LANG from '../../languages/zh-tw.json';
 export default function TestPage() {
   const [datas, setDatas] = useState([]);
   const head = {
+    id: LANG.test_id,
     box: LANG.box_fewPack,
     pack: LANG.pack_fewBoard,
     board: LANG.board_fewSomething,

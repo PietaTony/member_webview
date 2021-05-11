@@ -109,9 +109,9 @@ function TableItem({ data, editData }) {
   return (
     <>
       {Object.keys(newData).map((val, id) => {
-        return val === 'id' ? undefined : (
+        return (
           <td key={id}>
-            {val === 'counter' ? (
+            {val === 'counter' || val === 'id' ? (
               <p>{newData[val]}</p>
             ) : (
               <input
