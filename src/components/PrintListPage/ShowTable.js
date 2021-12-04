@@ -5,33 +5,30 @@ import LANG from '../../languages/zh-tw.json';
 
 import EditTable from './EditTable';
 import CreateTable from './CreateTable';
+import { deletePrintList } from '../../APIs/session';
+import { Link } from 'react-router-dom';
 
 export default function ShowTable({
   head,
   datas,
   setDatas,
-  createData,
-  deleteData,
-  editData,
 }) {
   const [isAddRow, setIsAddRow] = useState(false);
 
   return (
     <>
-      <Table striped bordered hover size="sm">
+      <Link to="/">返回主頁</Link>
+      <Table striped bordered hover size="sm" className='my-3'>
         <TableHead head={head} />
         <tbody>
           <TableBody
             datas={datas}
             setDatas={setDatas}
-            deleteData={deleteData}
-            editData={editData}
           />
           {isAddRow ? (
             <CreateTable
               datas={datas}
               setDatas={setDatas}
-              createData={createData}
               setIsAddRow={setIsAddRow}
             />
           ) : undefined}
@@ -39,7 +36,7 @@ export default function ShowTable({
       </Table>
       <input
         type="button"
-        value={isAddRow ? '取消新增 test' : '新增test'}
+        value={isAddRow ? '取消新增列印清單' : '新增一份列印清單'}
         onClick={() => setIsAddRow((isAddRow) => !isAddRow)}
       />
     </>
@@ -60,7 +57,7 @@ function TableHead({ head }) {
   );
 }
 
-function TableBody({ datas, setDatas, deleteData, editData }) {
+function TableBody({ datas, setDatas }) {
   // let [newData, setNewData] = useState();
 
   return (
@@ -68,13 +65,13 @@ function TableBody({ datas, setDatas, deleteData, editData }) {
       {datas.map((data, i) => {
         return (
           <tr key={i}>
-            <TableItem data={data} editData={editData} />
+            <TableItem data={data} />
             <td>
               <input
                 type="button"
                 value="Delete"
                 onClick={() => {
-                  deleteData(datas[i].id);
+                  deletePrintList(datas[i].id);
                   const newDatas = [...datas];
                   newDatas.splice(i, 1);
                   setDatas(newDatas);
@@ -87,7 +84,7 @@ function TableBody({ datas, setDatas, deleteData, editData }) {
   );
 }
 
-function TableItem({ data, editData }) {
+function TableItem({ data }) {
   const [newData, setNewData] = useState({ ...data });
   let [isEdit, setIsEdit] = useState(false);
 
@@ -111,11 +108,11 @@ function TableItem({ data, editData }) {
       {Object.keys(newData).map((val, id) => {
         return (
           <td key={id}>
-            {val === 'counter' || val === 'id' ? (
+            {val === 'id' ? (
               <p>{newData[val]}</p>
             ) : (
               <input
-                type={val.includes('Size') ? 'number' : 'text'}
+                type={val.includes('Tag') ? 'text' : 'number'}
                 style={styles.inputText}
                 placeholder={LANG.please_enter_data}
                 disabled={!isEdit}
@@ -130,7 +127,6 @@ function TableItem({ data, editData }) {
         isEdit={isEdit}
         editModeToggle={editModeToggle}
         newData={newData}
-        editData={editData}
       />
     </>
   );

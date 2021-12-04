@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import ShowTable from './ShowTable';
-import testAPI from '../../APIs/testAPI';
 
 import LANG from '../../languages/zh-tw.json';
 
-export default function TestPage() {
+import { getAllPrintList } from '../../APIs/session';
+
+export default function PrintListPage() {
   const [datas, setDatas] = useState([]);
   const head = {
     id: LANG.test_id,
@@ -21,8 +22,8 @@ export default function TestPage() {
 
   useEffect(() => {
     // setInitialDatas
-    testAPI.getAllTest().then((res) => {
-      const initialDatas = res.data.data;
+    getAllPrintList().then((res) => {
+      const initialDatas = res.data;
       setDatas(initialDatas);
     });
   }, []);
@@ -34,37 +35,7 @@ export default function TestPage() {
         columns={columns}
         datas={datas}
         setDatas={setDatas}
-        createData={createData}
-        deleteData={deleteData}
-        editData={editData}
       />
     </>
   );
 }
-
-const createData = (data) => {
-  testAPI
-    .createTest(data)
-    .then((res) => {})
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-const deleteData = (id) => {
-  testAPI
-    .deleteTest(id)
-    .then((res) => {})
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-const editData = (id, data) => {
-  testAPI
-    .editTest(id, data)
-    .then((res) => {})
-    .catch((err) => {
-      console.error(err);
-    });
-};

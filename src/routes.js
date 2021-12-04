@@ -1,6 +1,6 @@
 import MainPage from './components/MainPage';
 import TemplatePage from './components/TemplatePage';
-import TestPage from './components/TestPage';
+import PrintListPage from './components/PrintListPage';
 
 const ROUTES = [
   {
@@ -13,8 +13,8 @@ const ROUTES = [
     component: TemplatePage,
   },
   {
-    path: '/test',
-    component: TestPage,
+    path: '/printList',
+    component: PrintListPage,
   }
 ];
 

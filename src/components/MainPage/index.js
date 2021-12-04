@@ -30,7 +30,7 @@ export default function TemplatePage() {
 
   return (
     <>
-      <a href="/test">{LANG.goTest}</a>
+      <a href="/printList">{LANG.goTest}</a>
       <ShowTable
         head={head}
         columns={columns}

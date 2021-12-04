@@ -1,8 +1,8 @@
 import api from './api';
 
-const testAPI = {};
+const printListAPI = {};
 
-testAPI.getAllTest = () => {
+printListAPI.getAllPrintList = () => {
   const url = `/test`;
   return api.fire({
     url,
@@ -13,7 +13,7 @@ testAPI.getAllTest = () => {
   });
 };
 
-testAPI.createTest = (newTest) => {
+printListAPI.createPrintList = (newTest) => {
   const url = `/test`;
   return api.fire({
     url,
@@ -25,7 +25,7 @@ testAPI.createTest = (newTest) => {
   });
 };
 
-testAPI.getTest = (id) => {
+printListAPI.getPrintList = (id) => {
   const url = `/test/${id}`;
   return api.fire({
     url,
@@ -36,7 +36,7 @@ testAPI.getTest = (id) => {
   });
 };
 
-testAPI.editTest = (id, newTest) => {
+printListAPI.editPrintList = (id, newTest) => {
   const url = `/test/${id}`;
   return api.fire({
     url,
@@ -48,7 +48,7 @@ testAPI.editTest = (id, newTest) => {
   });
 };
 
-testAPI.deleteTest = (id) => {
+printListAPI.deletePrintList = (id) => {
   const url = `/test/${id}`;
   return api.fire({
     url,
@@ -59,4 +59,4 @@ testAPI.deleteTest = (id) => {
   });
 };
 
-export default testAPI;
+export default printListAPI;
