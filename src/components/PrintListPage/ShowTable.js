@@ -116,6 +116,7 @@ function TableItem({ data }) {
                 style={styles.inputText}
                 placeholder={LANG.please_enter_data}
                 disabled={!isEdit}
+                min="0"
                 value={newData[val]}
                 onChange={(e) => handleUpdateData(e, val)}
               />
